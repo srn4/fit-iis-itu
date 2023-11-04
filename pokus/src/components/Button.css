@@ -1,0 +1,17 @@
+.button1 {
+  position: relative;
+}
+.button {
+  border-radius: var(--br-xl);
+  background-color: var(--color-steelblue);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs);
+  text-align: left;
+  font-size: 96px;
+  color: var(--text);
+  font-family: var(--font-roboto);
+}

@@ -1,0 +1,57 @@
+.material-symbolsmenu1 {
+  position: absolute;
+  height: 67.7%;
+  width: 21.93%;
+  top: 16.09%;
+  right: 17.38%;
+  bottom: 16.21%;
+  left: 60.69%;
+  overflow: hidden;
+}
+.user-setup-inner {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-xl);
+  background-color: var(--color-steelblue);
+}
+.jmno1 {
+  margin: 0;
+}
+.jmno-pijmen1 {
+  position: absolute;
+  height: 87.36%;
+  width: 43.34%;
+  top: 5.75%;
+  left: 6.66%;
+  display: inline-block;
+}
+.vector-icon1 {
+  position: absolute;
+  height: 54.02%;
+  width: 19.66%;
+  top: 22.99%;
+  right: 13%;
+  bottom: 22.99%;
+  left: 67.34%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.user-setup2 {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: right;
+  font-size: var(--font-size-13xl);
+  color: var(--text);
+  font-family: var(--font-roboto);
+}
