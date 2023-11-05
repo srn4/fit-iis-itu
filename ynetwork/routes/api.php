@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/create-group', 'GroupController@create');
+//Route::post('/create-group', 'GroupController@create');
 Route::get('/api/groups', 'GroupController@index');
+Route::post('/create-group', [GroupController::class, 'create']);
