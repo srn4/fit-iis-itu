@@ -11,6 +11,7 @@ const Form: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log("posilam req");
         axios.post('http://localhost:8000/api/create-group', { name: inputValue })
             .then((response) => {
                 console.log('Group created successfully');
