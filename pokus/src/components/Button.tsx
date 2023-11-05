@@ -1,55 +1,29 @@
-import { FunctionComponent, useMemo, type CSSProperties } from "react";
+import { FunctionComponent, CSSProperties } from "react";
 import "./Button.css";
 
-type ButtonType = {
-  createGroupButtonText?: string;
-
-  /** Style props */
-  buttonPosition?: CSSProperties["position"];
-  buttonTop?: CSSProperties["top"];
-  buttonLeft?: CSSProperties["left"];
-  buttonCursor?: CSSProperties["cursor"];
-  buttonFontSize?: CSSProperties["fontSize"];
-
-  /** Action props */
-  onButtonContainerClick?: () => void;
+type ButtonProps = {
+  text: string;
+  onClick: () => void;
 };
 
-const Button: FunctionComponent<ButtonType> = ({
-  createGroupButtonText,
-  buttonPosition,
-  buttonTop,
-  buttonLeft,
-  buttonCursor,
-  buttonFontSize,
-  onButtonContainerClick,
-}) => {
-  const buttonStyle: CSSProperties = useMemo(() => {
-    return {
-      position: buttonPosition,
-      top: buttonTop,
-      left: buttonLeft,
-      cursor: buttonCursor,
-    };
-  }, [buttonPosition, buttonTop, buttonLeft, buttonCursor]);
+const Button: FunctionComponent<ButtonProps> = ({ text, onClick }) => {
+  const buttonStyle: CSSProperties = {
+    cursor: "pointer", // Change cursor to pointer on hover
+  };
 
-  const button1Style: CSSProperties = useMemo(() => {
-    return {
-      fontSize: buttonFontSize,
-    };
-  }, [buttonFontSize]);
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
-    <div
-      className="button"
-      style={buttonStyle}
-      onClick={onButtonContainerClick}
-    >
-      <b className="button1" style={button1Style}>
-        {createGroupButtonText}
-      </b>
+    <div className="button" style={buttonStyle} onClick={handleClick}>
+      {text}
     </div>
   );
 };
 
 export default Button;
+
+
