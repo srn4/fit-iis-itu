@@ -4,29 +4,6 @@ import Button from "../components/Button";
 import "./Skupiny.css";
 
 const Skupiny: FunctionComponent = () => {
-  const onUserSetupContainer1Click = useCallback(() => {
-    // Please sync "detail uctu" to the project
-  }, []);
-
-  const onHomeContainerClick = useCallback(() => {
-    // Please sync "main" to the project
-  }, []);
-
-  const onButtonContainerClick = useCallback(() => {
-    // Please sync "editor skupiny" to the project
-  }, []);
-
-  const onInspiraceContainerClick = useCallback(() => {
-    // Please sync "threads" to the project
-  }, []);
-
-  const onRegistrovnoTextClick = useCallback(() => {
-    // Please sync "threads" to the project
-  }, []);
-
-  const onZobrazitTextClick = useCallback(() => {
-    // Please sync "threads" to the project
-  }, []);
 
   return (
     <div className="skupiny">

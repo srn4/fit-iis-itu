@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/api/getData/{id}', 'YourController@getData');
+Route::post('/data', 'DataController@add');
+Route::delete('/data/{id}', 'DataController@delete');
