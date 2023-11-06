@@ -2,17 +2,25 @@
   
   .group-list {
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    text:black;
   }
   
   .group-item {
+    max-height: 50px;
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
+    min-height: fit-content;
+    min-width: 200px;
+  }
+
+  h3{
+    margin: 0px;
+    border: none;
+    font-size: 30px;
   }
   
   .error-frame {
