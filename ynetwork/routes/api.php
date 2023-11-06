@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Route::post('/create-group', 'GroupController@create');
-Route::get('/api/groups', 'GroupController@index');
+Route::get('/groups', 'GroupController@index');
 Route::post('/create-group', [GroupController::class, 'create']);

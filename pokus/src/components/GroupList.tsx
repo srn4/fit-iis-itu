@@ -14,7 +14,7 @@ const GroupList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/groups') 
+    axios.get('http://localhost:8000/groups') 
       .then((response) => {
         setGroups(response.data);
         setLoading(false); // Set loading to false after successful data fetch

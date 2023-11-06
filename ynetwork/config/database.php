@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'ynetwork'),
-            'username' => env('DB_USERNAME', 'ydb'),
-            'password' => env('DB_PASSWORD', 'ydb'),
+            'url' => 'mysql://avnadmin:AVNS_k1ovnYtayMSvutC2Y6a@ynetdb-ynetdb.a.aivencloud.com:25232/defaultdb?ssl-mode=REQUIRED',
+            'host' => 'ynetdb-ynetdb.a.aivencloud.com',
+            'port' => '25232',
+            'database' => 'defaultdb',
+            'username' => 'avnadmin',
+            'password' => 'AVNS_k1ovnYtayMSvutC2Y6a',
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
