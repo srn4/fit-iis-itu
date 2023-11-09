@@ -30,6 +30,6 @@ return new class extends Migration
             
             $table->dropForeign(['groupid']);
             $table->dropForeign(['userid']);
-        });$table->unsignedInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč
+        });//$table->unsignedInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč
     }
 };
