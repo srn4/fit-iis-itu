@@ -4,6 +4,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import './global.css';
+import axios from 'axios';
+
+axios.defaults.withCredentials = true;
 
 // Locate the root element in the HTML
 const rootElement = document.getElementById('root');

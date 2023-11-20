@@ -1,17 +1,19 @@
 import React, { useState, FormEvent } from 'react';
 import axios from 'axios';
 import './Login.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 function Login() {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const navigate = useNavigate(); // Create an instance of useNavigate
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/login', { login, password });
-            localStorage.setItem('token', response.data.access_token);
+            await axios.post('http://localhost:8000/api/login', { login, password });
             console.log("Logged in successfully");
+            navigate('/home'); // Redirect to the homepage or other page after login
         } catch (error) {
             console.error("Login error", error);
         }
@@ -43,5 +45,6 @@ function Login() {
 }
 
 export default Login;
+
 
 
