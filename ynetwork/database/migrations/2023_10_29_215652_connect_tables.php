@@ -10,11 +10,14 @@ return new class extends Migration
     {
         Schema::table('post', function (Blueprint $table) {
             if (!Schema::hasColumn('post', 'reactsTo')){
-                $table->unsignedInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč
-                $table->foreign('reactsTo')->references('id')->on('post'); // Nastavení foreign klíče
+                $table->unsignedBigInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč
+                $table->foreign('reactsTo')->references('id')->on('post')->onDelete('cascade')->onUpdate('cascade'); // Nastavení foreign klíče
             }
             
-            
+            if(!Schema::hasColumn('post', 'group_id')){
+                $table->unsignedBigInteger('group_id')->nullable(); 
+                $table->foreign('group_id')->references('id')->on('_group')->onDelete('cascade')->onUpdate('cascade');
+            }
             //$table->foreign('groupid')->references('id')->on('group'); // Nastavení foreign klíče
             //$table->foreign('userid')->references('id')->on('user'); // Nastavení foreign klíče
         });
@@ -24,12 +27,17 @@ return new class extends Migration
     {
         Schema::table('post', function (Blueprint $table) {
             if (Schema::hasColumn('post', 'reactsTo')){
-                $table->dropForeign(['reactsTo']);
-                //$table->dropColumn(['reactsTo']); //maybe
+                //$table->dropForeign(['reactsTo']);
+                
             }
-            
-            $table->dropForeign(['groupid']);
-            $table->dropForeign(['userid']);
-        });//$table->unsignedInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč
+            if (Schema::hasColumn('post', 'group_id')){
+                //$table->dropForeign(['group_id']);
+                
+            }; 
+            $table->dropColumn(['reactsTo']); //maybe
+            $table->dropColumn(['group_id']);
+        });
     }
 };
+//$table->dropColumn(['userid']);
+//$table->unsignedInteger('reactsTo')->nullable(); // Změněno na 'unsignedInteger' pro foreign klíč

@@ -12,7 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_interest', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('user_id');
+
+
+            // Define the second foreign key
+            $table->unsignedBigInteger('interest_id');
+
+            $table->primary(['user_id', 'interest_id']);
+
+            $table->foreign('interest_id')->references('id')->on('interest');
+            $table->foreign('user_id')->references('id')->on('user');
+            // Primary key composed of the two foreign keys
+            
+
+            // Timestamps
             $table->timestamps();
         });
     }
