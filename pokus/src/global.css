@@ -19,6 +19,7 @@ body {
   --text: #d2d2d2;
   --color-steelblue: #066c97;
   --color-gainsboro: #d9d9d9;
+  --background: linear-gradient(180deg, #114305 31.77%, #1a1c1a);
 
   /* Paddings */
   --padding-3xs: 10px;

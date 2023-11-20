@@ -1,13 +1,20 @@
-import React, { FunctionComponent } from "react";
-import Skupiny from "./pages/Skupiny";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/Startpage';
+import LoginPage from './pages/Login';
+import RegistrationPage from './pages/Registre';
 
-
-const App: FunctionComponent = () => {
-  return (
-    <div className="App">
-      <Skupiny />
-    </div>
-  );
-};
+function App() {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegistrationPage />} />
+                {/* Other routes can go here */}
+            </Routes>
+        </Router>
+    );
+}
 
 export default App;
