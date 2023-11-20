@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import axios from 'axios';
+import './Registre.css';
 
 function Registration() {
   const [login, setLogin] = useState<string>('');
@@ -16,20 +17,26 @@ function Registration() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="registration-form">
+      <label htmlFor="login" className="registration-label">Přihlašovací jméno</label>
       <input
+        id="login"
         type="text"
         value={login}
         onChange={(e) => setLogin(e.target.value)}
         placeholder="Login"
+        className="registration-input"
       />
+      <label htmlFor="password" className="registration-label">Heslo</label>
       <input
+        id="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
+        className="registration-input"
       />
-      <button type="submit">Register</button>
+      <button type="submit" className="registration-button">Registrovat</button>
     </form>
   );
 }
