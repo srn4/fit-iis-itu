@@ -3,6 +3,10 @@ body {
   margin: 0;
   line-height: normal;
 }
+
+body, button, input, textarea {
+  font-family: 'Roboto', sans-serif;
+}
 :root {
   /* fonts */
   --font-roboto: Roboto;

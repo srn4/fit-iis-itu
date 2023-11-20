@@ -1,0 +1,48 @@
+/* Registration.css */
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px; /* Adjust the width as needed */
+    margin: 40px auto; /* Added more margin to center the form */
+    padding: 40px;
+    background: rgba(22, 94, 5, 0.95); /* Dark green with opacity */
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+    color: #ffffff; /* White color for text */
+    font-family: 'Roboto', sans-serif; /* Apply Roboto font */
+}
+
+.registration-label {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: rgb(197, 194, 194);
+    text-align: center; /* Center the labels */
+    display: block; /* Ensure labels are block level for proper spacing */
+}
+
+.registration-input {
+    background: #ddd; /* Light grey background for inputs */
+    border: 2px solid #bbb; /* Grey border to match */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 16px;
+}
+
+.registration-button {
+    background-color: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%; /* Set the width of the button to be 50% of its parent */
+    margin: 10px auto; /* Center the button horizontally */
+}
+
+.registration-button:hover {
+    background-color: #0277bd;
+}

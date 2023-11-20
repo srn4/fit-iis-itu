@@ -1,12 +1,14 @@
 import React from 'react';
-import Login from '../components/Login'; // Import your Login component
+import Login from '../components/Login';
+import './Login.css';
 
 function LoginPage() {
     return (
-        <div>
-            <h2>Login</h2>
-            <Login />
-            {/* You can add more content or styling as needed */}
+        <div className="login-page-container">
+            <div>
+                <h2 className="login-page-title">Přihlášení</h2>
+                <Login />
+            </div>
         </div>
     );
 }

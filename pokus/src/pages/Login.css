@@ -1,0 +1,18 @@
+/* LoginPage.css */
+.login-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(180deg, #114305 32%, #1a1c1a);
+    color: rgb(197, 194, 194);
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-page-title {
+    margin-bottom: 3rem;
+    color: rgb(197, 194, 194);
+    text-align: center;
+    /* Adjust the size as needed to match the design */
+    font-size: 6rem;
+}

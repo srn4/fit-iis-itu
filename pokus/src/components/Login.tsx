@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import axios from 'axios';
+import './Login.css';
 
 function Login() {
     const [login, setLogin] = useState<string>('');
@@ -17,23 +18,30 @@ function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-form">
+            <label htmlFor="login" className="login-label">Přihlašovací jméno</label>
             <input
                 type="text"
+                id="login"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}
                 placeholder="Login"
+                className="login-input"
             />
+            <label htmlFor="password" className="login-label">Heslo</label>
             <input
                 type="password"
+                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                className="login-input"
             />
-            <button type="submit">Login</button>
+            <button type="submit" className="login-button">Přihlásit</button>
         </form>
     );
 }
 
 export default Login;
+
 
