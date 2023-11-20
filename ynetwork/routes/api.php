@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::post('/create-group', 'GroupController@create');
 Route::get('/groups', 'App\Http\Controllers\GroupController@index');
 Route::post('/create-group', [GroupController::class, 'create']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
