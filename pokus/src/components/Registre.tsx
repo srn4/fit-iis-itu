@@ -11,6 +11,7 @@ function Registration() {
     try {
       const response = await axios.post('http://localhost:8000/api/register', { login, password });
       console.log(response.data);
+      console.log("register done");
     } catch (error) {
       console.error("There was an error!", error);
     }

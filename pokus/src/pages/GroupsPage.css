@@ -1,0 +1,59 @@
+/* GroupsPage.css */
+
+.groups-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, #114305 0%, #004d40 100%); /* Sample background */
+    color: white; /* Text color */
+    min-height: 100vh; /* Full height */
+  }
+  
+  /* Top bar styles, if it's part of the GroupsPage */
+  .top-bar {
+    width: 100%;
+    background-color: #123456; /* Placeholder color */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Style for the search bar if it's part of the GroupsPage */
+  .search-bar {
+    margin: 10px;
+    padding: 5px 10px;
+    width: 100%; /* Or max-width if you want to limit it */
+  }
+  
+  /* Style for the main content area where groups are listed */
+  .main-content {
+    width: 100%; /* Or max-width to control the size */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Footer or additional buttons */
+  .footer {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .create-group-button {
+    background-color: #0288d1; /* Same as your register button for consistency */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 20px; /* Space from the list above */
+    cursor: pointer;
+  }
+  
+  .create-group-button:hover {
+    background-color: #0277bd; /* Darker shade for hover state */
+  }
+  

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname');
+            $table->string('name')->default('');
+            $table->string('surname')->default('');
             $table->string('login')->unique();
             $table->string('password');
             $table->enum('role', ['user', 'admin'])->default('user');
-            $table->boolean('isVerified');
+            $table->boolean('isVerified')->default(false);
         });
     }
 

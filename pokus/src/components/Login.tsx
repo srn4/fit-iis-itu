@@ -13,7 +13,7 @@ function Login() {
         try {
             await axios.post('http://localhost:8000/api/login', { login, password });
             console.log("Logged in successfully");
-            navigate('/home'); // Redirect to the homepage or other page after login
+            navigate('/groups'); // Redirect to the homepage or other page after login
         } catch (error) {
             console.error("Login error", error);
         }

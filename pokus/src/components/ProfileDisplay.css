@@ -1,0 +1,26 @@
+/* UserProfile.css */
+.user-profile {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px;
+  }
+  
+  .user-name {
+    font-size: 1.2em; /* Adjust font size as needed */
+    margin-right: 10px; /* Spacing between name and button */
+  }
+  
+  .user-settings-button {
+    padding: 5px 10px;
+    background-color: #0288d1; /* Adjust color to fit your design */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-settings-button:hover {
+    background-color: #0277bd; /* Darker shade for hover state */
+  }
+  

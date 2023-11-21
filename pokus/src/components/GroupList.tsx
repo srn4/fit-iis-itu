@@ -1,47 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./GroupList.css";
+import React from 'react';
+import './GroupList.css'; // Ensure you have a CSS file for this component
 
-type GroupType = {
-  id: number;
-  name: string;
-  // Add other properties as needed
-};
+const GroupList = () => {
+  const groups = [
+    { id: 1, name: 'Star wars' },
+    { id: 2, name: 'Bali' },
+    // ... other groups
+  ];
 
-const GroupList: React.FC = () => {
-  const [groups, setGroups] = useState<GroupType[]>([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    axios.get('http://localhost:8000/api/groups') 
-      .then((response) => {
-        setGroups(response.data);
-        setLoading(false); // Set loading to false after successful data fetch
-      })
-      .catch((err) => {
-        setError('Error loading data. Please try again later.');
-        setLoading(false); // Set loading to false after an error
-      });
-  }, []); // Empty dependency array to trigger the effect once
+  const handleRegister = (groupId: number) => {
+    // Add logic to register user to the group
+    console.log(`Registered to group with ID: ${groupId}`);
+  };
 
   return (
-    
-      <div className="group-list">
-        {loading && <p>Loading...</p>}
-        {error && (
-          <div className="error-frame">
-            <p className="error-message">{error}</p>
-          </div>
-        )}
-        {groups.map((group) => (
-          <div key={group.id} className="group-item">
-            <h3>{group.name}</h3>
-            {/* Display other group properties as needed */}
-          </div>
-        ))}
-      </div>
-    
+    <div className="group-list">
+      {groups.map(group => (
+        <div key={group.id} className="group-item">
+          <span className="group-name">{group.name}</span>
+          <button onClick={() => handleRegister(group.id)} className="group-register-button">
+            Registrovat
+          </button>
+        </div>
+      ))}
+    </div>
   );
 };
 

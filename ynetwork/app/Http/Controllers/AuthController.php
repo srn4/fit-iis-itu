@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-// If using Laravel Sanctum for API tokens
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Cookie;
 
 
@@ -16,13 +14,13 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'login' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'login' => 'required|string|max:255|unique:user',
+            'password' => 'required|string',
         ]);
 
         $user = User::create([
             'login' => $validatedData['login'],
-            'password' => Hash::make($validatedData['password']),
+            'password' => $validatedData['password'],
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
