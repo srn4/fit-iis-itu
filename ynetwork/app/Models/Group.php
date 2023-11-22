@@ -12,6 +12,30 @@ class Group extends Model
     protected $fillable = ['name', 'description'];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'group_id','user_id');
+        return $this->belongsToMany(User::class,'group_member','group_id','user_id');
     }
+
+    /**
+     * Add users to the group.
+     *
+     * @param  array  $userIds
+     * @return void
+     */
+    public function addUsers(array $userIds)
+    {
+        $this->users()->attach($userIds);
+    }
+
+    /**
+     * Remove users from the group.
+     *
+     * @param  array  $userIds
+     * @return void
+     */
+    public function removeUsers(array $userIds)
+    {
+        $this->users()->detach($userIds);
+    }
+
+
 }

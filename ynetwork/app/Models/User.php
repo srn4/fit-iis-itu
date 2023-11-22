@@ -46,4 +46,29 @@ class User extends Authenticatable
     protected $casts = [
         'isVerified' => 'boolean',
     ];
+
+    /**
+     * Define the many-to-many relationship with Group model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_member', 'user_id', 'group_id')->withTimestamps();
+    }
+
+    /**
+     * Add groups to the user.
+     *
+     * @param  array  $groupIds
+     * @return void
+     */
+    public function addGroups(array $groupIds)
+    {
+        $this->groups()->attach($groupIds);
+    }
+
+    public function removeGroups(array $groupIds){
+        $this->groups()->detach($groupIds);
+    }
 }
