@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import GroupList from '../components/GroupList';
 import './GroupsPage.css'
 import ProfileDisplay from '../components/ProfileDisplay';
+import  { AuthContext } from '../contexts/Authorization';
 
 const GroupsPage = () => {
+  const { user } = useContext(AuthContext); // Using the context to access user data
+
   return (
     <div className="groups-page-container">
-      {/* Top bar with navigation and search could go here */}
       <div className="main-content">
-        <ProfileDisplay />
+        {user && <ProfileDisplay user={user} />} {/* Render only if user is not null */}
         <GroupList />
       </div>
       <div className="footer">

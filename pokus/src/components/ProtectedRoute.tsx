@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from './Authorization'; // Import your useAuth hook
+import { useAuth } from '../contexts/Authorization'; // Import your useAuth hook
 
 const ProtectedRoute = () => {
   const { isAuthenticated, isVerifying } = useAuth();

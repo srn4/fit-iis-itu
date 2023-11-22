@@ -20,7 +20,7 @@ class AuthController extends Controller
 
         $user = User::create([
             'login' => $validatedData['login'],
-            'password' => $validatedData['password'],
+            'password' => Hash::make($validatedData['password']), // Hash the password
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -49,9 +49,8 @@ class AuthController extends Controller
 
         // Set the token in an HTTP-only cookie
         $cookie = cookie('authToken', $token, 60, null, null, false, true); // last `true` is `httpOnly`
+        return response()->json(['message' => 'Logged in successfully'])->withCookie($cookie);
 
-        return response()->json(['message' => 'Logged in successfully'
-        ])->withCookie($cookie);
     }
 
     public function logout(Request $request)

@@ -36,7 +36,7 @@ function Login() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
+                placeholder="Heslo"
                 className="login-input"
             />
             <button type="submit" className="login-button">Přihlásit</button>
