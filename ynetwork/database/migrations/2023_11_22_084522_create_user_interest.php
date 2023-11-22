@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+DB::statement('SET SESSION sql_require_primary_key=0');
+
 return new class extends Migration
 {
     /**
@@ -12,21 +14,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_interest', function (Blueprint $table) {
+            $table->timestamps();
+
             $table->unsignedBigInteger('user_id');
-
-
-            // Define the second foreign key
             $table->unsignedBigInteger('interest_id');
 
-            $table->primary(['user_id', 'interest_id']);
+            $table->primary(['user_id','interest_id']);
 
-            $table->foreign('interest_id')->references('id')->on('interest');
-            $table->foreign('user_id')->references('id')->on('user');
-            // Primary key composed of the two foreign keys
-            
-
-            // Timestamps
-            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('interest_id')->references('id')->on('interest')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

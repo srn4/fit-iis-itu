@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+DB::statement('SET SESSION sql_require_primary_key=0');
+
 return new class extends Migration
 {
     /**
@@ -12,22 +14,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('group_member', function (Blueprint $table) {
+            $table->timestamps();
+
             $table->unsignedBigInteger('user_id');
-
-            $table->foreign('user_id')->references('id')->on('user');
-
-            // Define the second foreign key
             $table->unsignedBigInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('_group');
 
-            // Primary key composed of the two foreign keys
-            $table->primary(['user_id', 'group_id']);
+            $table->primary(['user_id','group_id']);
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('group_id')->references('id')->on('_group')->onDelete('cascade')->onUpdate('cascade');
 
-            // Other columns for the table
             $table->enum('role', ['user', 'admin', 'mod'])->default('user');
 
-            // Timestamps
-            $table->timestamps();
         });
     }
 

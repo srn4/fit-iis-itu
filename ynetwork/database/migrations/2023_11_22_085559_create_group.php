@@ -16,6 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
+
+            $table->unsignedBigInteger('interest_id');
+            $table->foreign('interest_id')->references('id')->on('interest')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
