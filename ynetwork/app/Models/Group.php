@@ -37,5 +37,8 @@ class Group extends Model
         $this->users()->detach($userIds);
     }
 
-
+    public function interest()
+    {
+        return $this->belongsTo(Interest::class);
+    }
 }
