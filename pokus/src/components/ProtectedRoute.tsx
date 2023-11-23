@@ -1,15 +1,25 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../contexts/Authorization'; // Import your useAuth hook
+// ProtectedRoute.tsx
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/Authorization';
 
-const ProtectedRoute = () => {
-  const { isAuthenticated, isVerifying } = useAuth();
+interface ProtectedRouteProps {
+  children: JSX.Element;
+}
 
-  if (isVerifying) {
-    return <div>Loading...</div>; // Or any loading indicator you prefer
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const auth = useContext(AuthContext);
+
+  if (auth?.isLoading) {
+    return <div>Loading...</div>; // Show a loading indicator while authentication status is being verified
   }
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  if (!auth?.user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
 };
 
 export default ProtectedRoute;
+

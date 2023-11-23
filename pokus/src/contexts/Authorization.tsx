@@ -1,52 +1,60 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
-export const AuthContext = createContext({
-  isAuthenticated: false,
-  isVerifying: true,
-  user: null
-});
+// Adjust the User interface as needed
+interface User {
+  id: number;
+  login: string; // Assuming 'login' is the property you have in your backend user model
+  // You can keep 'name' and 'email' if they are still relevant or remove them if not
+  name?: string; // Optional if not always present
+  email?: string; // Optional if not always present
+}
 
-export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(true);
-  const [user, setUser] = useState(null);
+interface AuthContextType {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  isLoading: boolean;
+}
+
+export const AuthContext = createContext<AuthContextType | null>(null);
+
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export type { AuthContextType };
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const verifyAuth = async () => {
+    const verifyUser = async () => {
       try {
-        // Make sure to send the credentials with the request
-        const response = await axios.get('http://localhost:8000/api/auth/verify', { withCredentials: true });
-        if (response.data.authenticated) {
-          setIsAuthenticated(true);
-          setUser(response.data.user); // Store user data
+        // Adjust the URL if necessary to point to your user verification endpoint
+        const response = await axios.get('http://localhost:8000/api/auth/user', { withCredentials: true });
+        if (response.data) {
+          // Set user with the id and login received from the backend
+          setUser({
+            id: response.data.id,
+            login: response.data.login,
+            
+          });
         }
       } catch (error) {
-        console.error('Error verifying auth:', error);
-        setIsAuthenticated(false);
+        console.error('Error verifying user:', error);
+        setUser(null); // User is not authenticated
       } finally {
-        setIsVerifying(false);
+        setIsLoading(false);
       }
     };
 
-    verifyAuth();
+    verifyUser();
   }, []);
 
-  return { isAuthenticated, isVerifying, user };
-};
-
-type AuthProviderProps = {
-  children: ReactNode; // Define the type for children
-};
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const auth = useAuth();
-
   return (
-    <AuthContext.Provider value={auth}>
+    <AuthContext.Provider value={{ user, setUser, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export default useAuth;

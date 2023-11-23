@@ -6,8 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './global.css';
 import axios from 'axios';
 
-
 axios.defaults.withCredentials = true;
+//axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
+//axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+
 
 // Locate the root element in the HTML
 const rootElement = document.getElementById('root');
@@ -18,9 +20,9 @@ const root = createRoot(rootElement);
 
 // Render the App component within the BrowserRouter
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
       <App />
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 // Performance measuring (optional)
