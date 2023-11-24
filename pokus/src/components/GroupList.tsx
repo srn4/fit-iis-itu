@@ -13,6 +13,7 @@ const GroupList = () => {
       {groups.map(group => (
         <div key={group.id} className="group-item">
           <span className="group-name">{group.name}</span>
+          <button className="register-button">Register</button>
         </div>
       ))}
     </div>

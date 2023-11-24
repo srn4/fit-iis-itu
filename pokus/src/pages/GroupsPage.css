@@ -1,59 +1,70 @@
 /* GroupsPage.css */
 
 .groups-page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(180deg, #114305 0%, #004d40 100%); /* Sample background */
-    color: white; /* Text color */
-    min-height: 100vh; /* Full height */
-  }
-  
-  /* Top bar styles, if it's part of the GroupsPage */
-  .top-bar {
-    width: 100%;
-    background-color: #123456; /* Placeholder color */
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  /* Style for the search bar if it's part of the GroupsPage */
-  .search-bar {
-    margin: 10px;
-    padding: 5px 10px;
-    width: 100%; /* Or max-width if you want to limit it */
-  }
-  
-  /* Style for the main content area where groups are listed */
-  .main-content {
-    width: 100%; /* Or max-width to control the size */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Footer or additional buttons */
-  .footer {
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .create-group-button {
-    background-color: #0288d1; /* Same as your register button for consistency */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 20px; /* Space from the list above */
-    cursor: pointer;
-  }
-  
-  .create-group-button:hover {
-    background-color: #0277bd; /* Darker shade for hover state */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(180deg, #114305 0%, #004d40 100%);
+  color: white;
+  min-height: 100vh;
+  padding: 10px 20px;
+}
+
+.top-bar {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.search-bar {
+  flex-grow: 1;
+  max-width: 300px;
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+}
+
+.user-profile {
+  flex-shrink: 0; /* Prevent the user profile from shrinking */
+  margin-left: 10px; /* Add space between search bar and profile display */
+}
+
+.main-content {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Adjust group item width and add margin for spacing */
+.group-item {
+  width: 80%; /* Adjust the width to your preference */
+  max-width: 600px; /* Set a max-width to control the size on larger screens */
+  margin-bottom: 10px; /* Add some space between the group items */
+}
+
+.footer {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.create-group-button {
+  background-color: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}

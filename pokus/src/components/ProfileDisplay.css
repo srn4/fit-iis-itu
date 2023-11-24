@@ -1,17 +1,21 @@
 /* UserProfile.css */
 .user-profile {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 10px;
-  }
+  flex-shrink: 0; /* Prevent the user profile from shrinking */
+  margin-left: 20px; /* Space between search bar and profile display */
+  background: #fff; /* Light background for the user profile */
+  padding: 5px 10px; /* Padding inside user profile */
+  border-radius: 5px; /* Rounded corners for user profile */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for depth */
+}
   
   .user-name {
     font-size: 1.2em; /* Adjust font size as needed */
     margin-right: 10px; /* Spacing between name and button */
+    color: #333;
   }
   
   .user-settings-button {
+    margin-left: 10px;
     padding: 5px 10px;
     background-color: #0288d1; /* Adjust color to fit your design */
     color: white;
