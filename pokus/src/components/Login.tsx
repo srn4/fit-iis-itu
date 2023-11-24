@@ -16,6 +16,7 @@ function Login() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setLoginError('');
+      setLoginSuccess('');
       try {
         // Use the login function from the context
         await contextLogin(login, password);

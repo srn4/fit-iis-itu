@@ -9,6 +9,15 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 //axios.defaults.xsrfCookieName = 'XSRF-TOKEN';
 //axios.defaults.xsrfHeaderName = 'X-XSRF-TOKEN';
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("auth_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 
 // Locate the root element in the HTML

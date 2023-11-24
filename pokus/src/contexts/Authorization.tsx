@@ -10,9 +10,7 @@ interface AuthContextType {
 }
 
 // Create a context for authorization with an initial value
-export const AuthContext = createContext<AuthContextType>(
-  {} as AuthContextType
-);
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -22,6 +20,28 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<any>(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      // Validate the token with your backend here
+      axios.get('http://localhost:8000/api/validateToken', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(response => {
+        // If token is valid, set the user and authenticated state
+        setIsAuthenticated(true);
+        setUser(response.data.user); // Assuming the user data is returned here
+      })
+      .catch(error => {
+        console.error('Token validation failed:', error);
+        // Handle invalid token scenario
+        localStorage.removeItem('auth_token');
+        setIsAuthenticated(false);
+        setUser(null);
+      });
+    }
+  }, []);
+  
   // Function to handle login
   const login = async (login: string, password: string) => {
     try {
@@ -35,7 +55,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(user);
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle login failure (e.g., show a notification to the user)
+
+      // Reset authentication status and user info on failure
+      setIsAuthenticated(false);
+      setUser(null);
+
+      throw error;
     }
   };
 

@@ -67,4 +67,9 @@ class AuthController extends Controller
             'message' => 'Successfully logged out'
         ]);
     }
+
+    public function validateToken(Request $request)
+    {
+        return response()->json(['user' => $request->user()]);
+    }
 }
