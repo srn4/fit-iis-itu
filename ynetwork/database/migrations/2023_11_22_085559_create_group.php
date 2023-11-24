@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
 
-            $table->unsignedBigInteger('interest_id');
+            $table->unsignedBigInteger('interest_id')->nullable(true);
             $table->foreign('interest_id')->references('id')->on('interest')->onDelete('cascade')->onUpdate('cascade');
         });
     }
