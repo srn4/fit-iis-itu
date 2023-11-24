@@ -8,6 +8,8 @@ import GroupsPage from './pages/GroupsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/Authorization';
 
+const apiUrl = 'http://localhost:8000';
+
 function App() {
 
     return (

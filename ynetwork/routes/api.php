@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -25,6 +26,16 @@ Route::post('/create-group', [GroupController::class, 'create']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+//UserController routes
+//get all users
+Route::get('/users', [UserController::class,'index']);
+//get one user by id
+Route::get('/users/{id}', [UserController::class,'getUser']);
+//update one user with id
+Route::put('/users/{id}', [UserController::class,'updateUser']);
+//delete user by id
+Route::delete('/users/{id}', [UserController::class,'deleteUser']);
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
