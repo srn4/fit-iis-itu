@@ -24,8 +24,9 @@ Route::get('/groups', 'App\Http\Controllers\GroupController@index');
 Route::post('/create-group', [GroupController::class, 'create']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -38,6 +39,6 @@ Route::middleware('auth:sanctum')->get('/auth/verify', function (Request $reques
         'authenticated' => true,
         'user' => $request->user() // Add this line to include user data in the response
     ]);
-});
+});*/   
 
 
