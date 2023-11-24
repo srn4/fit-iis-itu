@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/Authorization';
 import './Login.css';
 
 function Login() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
+    const navigate = useNavigate();
+    const [loginSuccess, setLoginSuccess] = useState('');
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      // Send 'login' instead of 'email'
-      await axios.post('http://localhost:8000/api/login', { login, password }, { withCredentials: true });
-      console.log('Logged in successfully');
-      navigate('/groups'); // Redirect to the GroupsPage after successful login
-    } catch (error) {
+    // Use the AuthContext
+    const { login: contextLogin } = useContext(AuthContext);
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setLoginError('');
+      try {
+        // Use the login function from the context
+        await contextLogin(login, password);
+        setLoginSuccess('Login successful! Redirecting...');
+        setTimeout(() => navigate('/groups'), 3000);  // Redirect after 3 seconds
+      } catch (error) {
         console.log('login fail');
-      console.error('Login error', error);
-    }
-  };
+        setLoginError('Failed to log in. Please check your credentials.');
+      }
+    };
 
   return (
     <form onSubmit={handleSubmit} className="login-form">
@@ -42,6 +48,8 @@ function Login() {
         className="login-input"
       />
       <button type="submit" className="login-button">Přihlásit</button>
+      {loginError && <div className="login-error">{loginError}</div>}
+      {loginSuccess && <div className="login-success">{loginSuccess}</div>}
     </form>
   );
 }

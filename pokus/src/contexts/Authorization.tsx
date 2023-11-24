@@ -1,60 +1,66 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useEffect, ReactNode } from "react";
+import axios from "axios";
 
-// Adjust the User interface as needed
-interface User {
-  id: number;
-  login: string; // Assuming 'login' is the property you have in your backend user model
-  // You can keep 'name' and 'email' if they are still relevant or remove them if not
-  name?: string; // Optional if not always present
-  email?: string; // Optional if not always present
-}
-
+// Defining the shape of the context's value
 interface AuthContextType {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  isLoading: boolean;
+  isAuthenticated: boolean;
+  user: any;
+  login: (login: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+// Create a context for authorization with an initial value
+export const AuthContext = createContext<AuthContextType>(
+  {} as AuthContextType
+);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export type { AuthContextType };
+const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // Function to handle login
+  const login = async (login: string, password: string) => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/login", {
+        login,
+        password,
+      });
+      const { access_token, user } = response.data;
+      localStorage.setItem("auth_token", access_token);
+      setIsAuthenticated(true);
+      setUser(user);
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle login failure (e.g., show a notification to the user)
+    }
+  };
 
+  // Function to handle logout
+  const logout = () => {
+    localStorage.removeItem("auth_token");
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  // Check authentication status when the app loads
   useEffect(() => {
-    const verifyUser = async () => {
-      try {
-        // Adjust the URL if necessary to point to your user verification endpoint
-        const response = await axios.get('http://localhost:8000/api/auth/user', { withCredentials: true });
-        if (response.data) {
-          // Set user with the id and login received from the backend
-          setUser({
-            id: response.data.id,
-            login: response.data.login,
-            
-          });
-        }
-      } catch (error) {
-        console.error('Error verifying user:', error);
-        setUser(null); // User is not authenticated
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    verifyUser();
+    const token = localStorage.getItem("auth_token");
+    if (token) {
+      // Here, you can also make a request to a backend endpoint to verify the token
+      setIsAuthenticated(true);
+      // Optionally fetch user details here if needed
+    }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, isLoading }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthProvider;
