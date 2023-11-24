@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $table = 'post';
 
-    protected $fillable = ['likes','dislikes','content','subject'];
+    protected $fillable = ['likes','dislikes','content','subject','group_id', 'user_id'];
 
     public function likes()
     {

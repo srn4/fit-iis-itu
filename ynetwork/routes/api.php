@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 
 /*
@@ -38,6 +39,22 @@ Route::get('/users/{id}', [UserController::class,'getUser']);
 Route::put('/users/{id}', [UserController::class,'updateUser']);
 //delete user by id
 Route::delete('/users/{id}', [UserController::class,'deleteUser']);
+
+
+//GroupController routes
+//index
+Route::get('/posts', [PostController::class, 'index']);
+//create post
+Route::post('/posts', [PostController::class, 'create']);
+//read one post by id
+Route::get('/posts/{id}', [PostController::class,'read']);
+//update one post by id
+Route::put('/posts/{id}', [PostController::class,'update']);
+//delete one post by id
+Route::delete('/posts/{id}', [PostController::class,'delete']);
+
+
+
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
