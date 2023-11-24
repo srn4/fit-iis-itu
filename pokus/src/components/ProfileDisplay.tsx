@@ -17,13 +17,19 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ user }) => {
   const handleUserSettings = () => {
     navigate('/user-settings'); // Replace with the actual path to user settings page
   };
+  
+  const fullName = user.name && user.surname ? `${user.name} ${user.surname}` : '';
 
   return (
     <div className="user-profile">
-      <span className="user-name">
-        <p>Přihlášen jako: {user.login} {user.name && user.surname ? `${user.name} ${user.surname}` : ''}</p>
-      </span>
-      <button className="user-settings-button" onClick={handleUserSettings}>
+      <div className="user-name">
+        <strong>Přihlášen jako:</strong> {user.login} {fullName && <span>{fullName}</span>}
+      </div>
+      <button
+        className="user-settings-button"
+        onClick={handleUserSettings}
+        aria-label="Open user settings"
+      >
         User Setup
       </button>
     </div>
