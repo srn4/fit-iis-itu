@@ -33,18 +33,18 @@ class UserController extends Controller
         if(!$user){
             return response()->json(['error'=> 'user not found'],404);
         }
-        /* $request->validate([
+        $request->validate([
             'name'=> 'sometimes|string|max:255',
             'surname'=> 'sometimes|string|max:255',
-            'login'=> 'sometimes|email|unique:users,email,'. $user->id,
+            'login'=> 'sometimes|unique:users,login,'. $user->id,
             'password'=> 'sometimes|string',
             'role'=>'sometimes|in:user,admin',
             'isVerified'=>'sometimes|boolean',
             'isVisible'=> 'sometimes|boolean',
             ]);
- */
-        //$user->update($request->all());
-        return response()->json(['zavolat to jde'], 200);
+        $user->update($request->all());
+        return response()->json(['user'=> $user], 200);
+        //return response()->json(['fakt se to vola'], 200);
     }
 
     public function deleteUser ($id){

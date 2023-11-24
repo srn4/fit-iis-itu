@@ -26,7 +26,7 @@ class User extends Authenticatable
         'password',
         'role',
         'isVerified',
-        
+        'isVisible'
     ];
 
     /**
@@ -72,4 +72,20 @@ class User extends Authenticatable
     public function removeGroups(array $groupIds){
         $this->groups()->detach($groupIds);
     }
+
+    /* public function likedPosts(){
+        return $this->belongsToMany(Post::class,'user_post_likes','user_id','post_id')->withPivot('reaction');
+    } */
+
+    /* public function postsReactedTo($reaction = null)
+    {
+        $query = $this->belongsToMany(Post::class, 'user_post_likes', 'user_id', 'post_id')
+            ->withPivot('reaction');
+
+        if ($reaction !== null) {
+            $query->wherePivot('reaction', $reaction);
+        }
+
+        return $query;
+    } */
 }
