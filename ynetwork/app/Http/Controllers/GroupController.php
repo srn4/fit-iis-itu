@@ -3,28 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Group; // Adjust namespace based on your model's location
+use App\Models\Group; 
 
 class GroupController extends Controller
 {
     public function index()
     {
-        // Fetch all groups
-        $groups = Group::all(); // Assuming the Group model exists
+        $groups = Group::all();
 
         return response()->json($groups);
     }
 
     public function create(Request $request)
     {
-        // Validate and store a new group
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            // Add other validation rules for group creation fields
+            'description'=> 'required|max:255',
+            'interest_id'=>'sometimes|integer'
         ]);
 
         $group = Group::create($validatedData);
 
         return response()->json(['message' => 'Group created successfully', 'group' => $group]);
+    }
+
+    public function read($id){
+        $group = Group::findOrFail($id);
+        return response()->json(['group'=>$group]);
+    }
+
+    public function update(Request $request, $id){
+        $group = Group::findOrFail($id);
+        $validatedData = $request->validate([
+            'name'=> 'sometimes|string|max:255',
+            'description'=> 'sometimes|string|max:255',
+            'interest_id'=> 'sometimes|integer'
+        ]);
+        $group->update($validatedData);
+        return response()->json(['message'=> 'Group updated succesfully','group'=> $group]);
+    }
+
+    public function delete($id){
+        $group = Group::findOrFail($id);
+        $group->delete();
+        return response()->json(['message'=> 'group deleted succesfully']);
     }
 }

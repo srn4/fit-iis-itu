@@ -6,6 +6,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\InterestController;
 
 
 /*
@@ -21,9 +22,7 @@ use App\Http\Controllers\PostController;
 
 
 
-//Route::post('/create-group', 'GroupController@create');
-Route::get('/groups', 'App\Http\Controllers\GroupController@index');
-Route::post('/create-group', [GroupController::class, 'create']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
@@ -41,7 +40,7 @@ Route::put('/users/{id}', [UserController::class,'updateUser']);
 Route::delete('/users/{id}', [UserController::class,'deleteUser']);
 
 
-//GroupController routes
+//PostController routes
 //index
 Route::get('/posts', [PostController::class, 'index']);
 //create post
@@ -53,9 +52,19 @@ Route::put('/posts/{id}', [PostController::class,'update']);
 //delete one post by id
 Route::delete('/posts/{id}', [PostController::class,'delete']);
 
+//GroupController routes
+Route::get('/groups', [GroupController::class, 'index']);
+Route::post('/groups', [GroupController::class, 'create']);
+Route::get('/groups/{id}', [GroupController::class, 'read']);
+Route::put('/groups/{id}', [GroupController::class, 'update']);
+Route::delete('/groups/{id}', [GroupController::class, 'delete']);
 
 
-
+Route::get('/interests', [InterestController::class, 'index']);
+Route::post('/interests', [InterestController::class, 'create']);
+Route::get('/interests/{id}', [InterestController::class, 'read']);
+Route::put('/interests/{id}', [InterestController::class, 'update']);
+Route::delete('/interests/{id}', [InterestController::class, 'delete']);
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
