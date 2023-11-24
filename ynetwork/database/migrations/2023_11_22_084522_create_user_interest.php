@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->primary(['user_id','interest_id']);
 
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('interest_id')->references('id')->on('interest')->onDelete('cascade')->onUpdate('cascade');
         });
     }

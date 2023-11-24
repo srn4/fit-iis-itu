@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
 
             $table->primary(['user_id','group_id']);
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('group_id')->references('id')->on('_group')->onDelete('cascade')->onUpdate('cascade');
 
             $table->enum('role', ['user', 'admin', 'mod'])->default('user');
