@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import "./Form.css";
 import axios from 'axios';
+import { apiUrl } from '../constants';
 
 const Form: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [groupName, setGroupName] = useState('');
+  const [groupDesc, setGroupDesc] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGroupName(e.target.value);
+  };
+
+  const handleDescChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGroupDesc(e.target.value);
   };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log("posilam req");
-        axios.post('http://localhost:8000/api/create-group', { name: inputValue })
-            .then((response) => {
-                console.log('Group created successfully');
-            })
-            .catch((error) => {
-                console.error('Error creating group:', error);
-            });
+        axios.post(`${apiUrl}/api/groups`, {
+          name: groupName,
+          description: groupDesc,
+        })
+        .then((response) => {
+          console.log('Group created successfully');
+        })
+        .catch((error) => {
+          console.error('Error creating group:', error);
+        });
     };
 
   return (
@@ -27,9 +36,15 @@ const Form: React.FC = () => {
         <div className="input-container">
           <input
             type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Type something..."
+            value={groupName}
+            onChange={handleNameChange}
+            placeholder="Group's name"
+          />
+          <input
+          type="text"
+          value={groupDesc}
+          onChange={handleDescChange}
+          placeholder="Group's description"
           />
           <button type="submit">Přidat Skupinu</button>
         </div>

@@ -3,11 +3,19 @@ import GroupList from '../components/GroupList';
 import ProfileDisplay from '../components/ProfileDisplay'; // Import the ProfileDisplay component
 import { AuthContext } from '../contexts/Authorization'; // Import the AuthContext
 import './GroupsPage.css';
+import { useNavigate } from 'react-router-dom';
+
 //import { useHistory } from 'react-router-dom';
 
 const GroupsPage = () => {
   const { user } = useContext(AuthContext); // Use the AuthContext to get the current user
   //const history = useHistory();
+
+  const navigate = useNavigate();
+
+  const handleCreateGroup = () => {
+    navigate('/create-group'); 
+  };
 
   return (
     <div className="groups-page-container">
@@ -21,7 +29,7 @@ const GroupsPage = () => {
         <GroupList />
       </div>
       <div className="footer">
-        <button className="create-group-button">Vytvořit skupinu</button>
+        <button className="create-group-button" onClick={handleCreateGroup}>Vytvořit skupinu</button>
       </div>
     </div>
   );

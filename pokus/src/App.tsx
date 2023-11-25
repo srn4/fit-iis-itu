@@ -6,7 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrePage";
 import GroupsPage from "./pages/GroupsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import CreateGroupsPage from "./pages/CreateGroupsPage";
 
 
 function App() {
@@ -23,6 +23,11 @@ function App() {
               <ProtectedRoute>
                 <GroupsPage />
               </ProtectedRoute>
+            }
+          />
+          <Route path="create-group"
+            element={
+              <ProtectedRoute><CreateGroupsPage/></ProtectedRoute>
             }
           />
           {/* Fallback route for unknown paths */}
