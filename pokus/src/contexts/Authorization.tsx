@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
+import { apiUrl } from "../constants";
 
 // Defining the shape of the context's value
 interface AuthContextType {
@@ -28,7 +29,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const token = localStorage.getItem('auth_token');
     if (token) {
       console.log('Token found, validating...');
-      axios.get('http://localhost:8000/api/validateToken', {
+      axios.get(`${apiUrl}/api/validateToken`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(response => {
@@ -53,21 +54,28 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   // Function to handle login
   const login = async (login: string, password: string) => {
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
+      const response = await axios.post(`${apiUrl}/api/login`, {
         login,
         password,
       });
+  
       const { access_token, user } = response.data;
+      const user_id = user.id;
+  
       localStorage.setItem("auth_token", access_token);
       setIsAuthenticated(true);
       setUser(user);
+  
+      // Set 'user_id' as a default header for all subsequent requests
+      axios.defaults.headers.common['user_id'] = user_id;
+  
     } catch (error) {
       console.error("Login failed:", error);
-
+  
       // Reset authentication status and user info on failure
       setIsAuthenticated(false);
       setUser(null);
-
+  
       throw error;
     }
   };

@@ -12,7 +12,7 @@ class Group extends Model
     protected $fillable = ['name', 'description'];
 
     public function users(){
-        return $this->belongsToMany(User::class,'group_member','group_id','user_id');
+        return $this->belongsToMany(User::class,'group_member','group_id','user_id')->withPivot('role');
     }
 
     /**

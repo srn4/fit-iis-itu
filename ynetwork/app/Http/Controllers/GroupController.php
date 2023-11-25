@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Group; 
+use App\Models\User;
 
 class GroupController extends Controller
 {
@@ -24,6 +25,14 @@ class GroupController extends Controller
         ]);
 
         $group = Group::create($validatedData);
+        
+        $user_id = $request->header('user_id');
+        //\Log::info(''. $user_id);
+        //$user = User::find($user_id);
+        //$user = $request->user();
+        $user = User::find($user_id);
+
+        $group->users()->attach($user, ['role' => 'admin']);
 
         return response()->json(['message' => 'Group created successfully', 'group' => $group]);
     }

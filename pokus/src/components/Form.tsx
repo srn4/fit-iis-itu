@@ -6,6 +6,7 @@ import { apiUrl } from '../constants';
 const Form: React.FC = () => {
   const [groupName, setGroupName] = useState('');
   const [groupDesc, setGroupDesc] = useState('');
+  
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGroupName(e.target.value);
@@ -38,13 +39,13 @@ const Form: React.FC = () => {
             type="text"
             value={groupName}
             onChange={handleNameChange}
-            placeholder="Group's name"
+            placeholder="*Group's name"
           />
           <input
           type="text"
           value={groupDesc}
           onChange={handleDescChange}
-          placeholder="Group's description"
+          placeholder="*Group's description"
           />
           <button type="submit">Přidat Skupinu</button>
         </div>

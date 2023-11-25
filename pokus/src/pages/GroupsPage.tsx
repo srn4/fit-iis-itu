@@ -25,12 +25,13 @@ const GroupsPage = () => {
         <input type="text" className="search-bar" placeholder="Search..." />
         {user && <ProfileDisplay user={user} />}
       </div>
-      <div className="main-content">
-        <GroupList />
-      </div>
       <div className="footer">
         <button className="create-group-button" onClick={handleCreateGroup}>Vytvořit skupinu</button>
       </div>
+      <div className="main-content">
+        <GroupList />
+      </div>
+      
     </div>
   );
 };
