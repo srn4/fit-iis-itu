@@ -7,7 +7,7 @@ import RegistrationPage from "./pages/RegistrePage";
 import GroupsPage from "./pages/GroupsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-const apiUrl = 'http://localhost:8000';
+
 
 function App() {
   return (

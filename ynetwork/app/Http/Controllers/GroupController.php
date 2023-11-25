@@ -19,7 +19,8 @@ class GroupController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'description'=> 'required|max:255',
-            'interest_id'=>'sometimes|integer'
+            'interest_id'=>'sometimes|integer',
+            'user_id'=>'sometimes|integer'
         ]);
 
         $group = Group::create($validatedData);

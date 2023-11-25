@@ -21,7 +21,7 @@ function Login() {
         // Use the login function from the context
         await contextLogin(login, password);
         setLoginSuccess('Login successful! Redirecting...');
-        setTimeout(() => navigate('/groups'), 3000);  // Redirect after 3 seconds
+        setTimeout(() => navigate('/groups'), /* 3000 */);  // Redirect after 3 seconds
       } catch (error) {
         console.log('login fail');
         setLoginError('Failed to log in. Please check your credentials.');
