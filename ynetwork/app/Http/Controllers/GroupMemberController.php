@@ -33,4 +33,53 @@ class GroupMemberController extends Controller
 
         return response()->json(['message' => 'Membership request sent successfully.']);
     }
+
+    public function requestMod(Request $request, $groupId)
+    {
+        $userId = $request->header('user_id');
+
+        // Check if the user is already a mod or has a pending mod request
+        $existingMod = GroupMember::where('user_id', $userId)
+            ->where('group_id', $groupId)
+            ->whereIn('role', ['mod', 'mod_request'])
+            ->exists();
+
+        if ($existingMod) {
+            return response()->json(['message' => 'User is already a mod or has a pending mod request.']);
+        }
+
+        // Create a new GroupMember record with role 'mod_request'
+        $groupMember = new GroupMember([
+            'user_id' => $userId,
+            'group_id' => $groupId,
+            'role' => 'mod_request',
+        ]);
+
+        $groupMember->save();
+
+        return response()->json(['message' => 'Moderator request sent successfully.']);
+    }
+
+    public function getUserGroups(Request $request){
+        $userId = $request->header('user_id');
+
+        $memberGroups = GroupMember::where('user_id', $userId)
+        ->whereIn('role', ['member'])
+        ->with(['group:id,name,description'])
+        ->get();
+
+        return response()->json(['member_groups' => $memberGroups]);
+    }
+
+    public function getAdminGroups(Request $request)
+    {
+        $userId = $request->header('user_id');
+
+        $adminGroups = GroupMember::where('user_id', $userId)
+            ->whereIn('role', ['admin'])
+            ->with('group:id,name,description')
+            ->get();
+
+        return response()->json(['admin_groups' => $adminGroups]);
+    }
 }

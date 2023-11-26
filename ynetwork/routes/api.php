@@ -61,8 +61,14 @@ Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'delete']);
 
 //GroupMemberController routes
+//send group membership request
 Route::post('/group-register/{groupId}/', [GroupMemberController::class,'requestMembership']);
-//group-register`, {groupId});
+//send mod request
+Route::post('/group-mod-request/{groupId}', [GroupMemberController::class, 'requestMod']);
+//get member groups
+Route::get('/user-groups', [GroupMemberController::class, 'getUserGroups']);
+//get admin groups
+Route::get('/admin-groups', [GroupMemberController::class, 'getAdminGroups']);
 
 //Interest routes, tbd
 Route::get('/interests', [InterestController::class, 'index']);
