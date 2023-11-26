@@ -34,30 +34,33 @@ class GroupMemberController extends Controller
         return response()->json(['message' => 'Membership request sent successfully.']);
     }
 
+    /**
+     * Request to become a mod or change role to mod_request.
+     *
+     * @param Request $request
+     * @param int $groupId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function requestMod(Request $request, $groupId)
     {
         $userId = $request->header('user_id');
 
-        // Check if the user is already a mod or has a pending mod request
+        // Find the existing record for the user and group
         $existingMod = GroupMember::where('user_id', $userId)
             ->where('group_id', $groupId)
-            ->whereIn('role', ['mod', 'mod_request'])
-            ->exists();
+            ->where('role', 'member')
+            ->first();
 
         if ($existingMod) {
-            return response()->json(['message' => 'User is already a mod or has a pending mod request.']);
+            // If the user already has a role as a member, update it to 'mod_request'
+            GroupMember::updateOrInsert(
+                ['user_id' => $userId, 'group_id' => $groupId],
+                ['role' => 'mod_request', 'updated_at' => now()]
+            );
+            return response()->json(['message' => 'Role updated to mod_request successfully.']);
         }
 
-        // Create a new GroupMember record with role 'mod_request'
-        $groupMember = new GroupMember([
-            'user_id' => $userId,
-            'group_id' => $groupId,
-            'role' => 'mod_request',
-        ]);
-
-        $groupMember->save();
-
-        return response()->json(['message' => 'Moderator request sent successfully.']);
+        return response()->json(['message' => 'User is not a member or already has a mod role.']);
     }
 
     public function getUserGroups(Request $request){
@@ -120,5 +123,117 @@ class GroupMemberController extends Controller
             ->get();
 
         return response()->json(['moderator_requests' => $moderatorRequests]);
+    }
+
+    /**
+     * Decline membership request.
+     *
+     * @param Request $request
+     * @param int $groupId
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function declineMembershipRequest(Request $request, $groupId, $userId)
+    {
+        $adminId = $request->header('user_id');
+
+        // Check if the user making the request is an admin
+        $isAdmin = GroupMember::where('user_id', $adminId)->where('role', 'admin')->exists();
+
+        if (!$isAdmin) {
+            return response()->json(['message' => 'You are not authorized to decline membership requests.'], 403);
+        }
+
+        // Remove the membership request from the group_member table
+        GroupMember::where('user_id', $userId)
+            ->where('group_id', $groupId)
+            ->where('role', 'member_request')
+            ->delete();
+
+        return response()->json(['message' => 'Membership request declined successfully.']);
+    }
+
+    /**
+     * Decline mod request.
+     *
+     * @param Request $request
+     * @param int $groupId
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function declineModRequest(Request $request, $groupId, $userId)
+    {
+        $adminId = $request->header('user_id');
+
+        // Check if the user making the request is an admin
+        $isAdmin = GroupMember::where('user_id', $adminId)->where('role', 'admin')->exists();
+
+        if (!$isAdmin) {
+            return response()->json(['message' => 'You are not authorized to decline mod requests.'], 403);
+        }
+
+        // Remove the mod request from the group_member table
+        GroupMember::where('user_id', $userId)
+            ->where('group_id', $groupId)
+            ->where('role', 'mod_request')
+            ->delete();
+
+        return response()->json(['message' => 'Mod request declined successfully.']);
+    }
+
+    /**
+     * Set user role to member.
+     *
+     * @param Request $request
+     * @param int $groupId
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setMember(Request $request, $groupId, $userId)
+    {
+        $adminId = $request->header('user_id');
+
+        // Check if the user making the request is an admin
+        $isAdmin = GroupMember::where('user_id', $adminId)->where('role', 'admin')->exists();
+
+        if (!$isAdmin) {
+            return response()->json(['message' => 'You are not authorized to set user roles.'], 403);
+        }
+
+        // Update the role to member from member_request
+        GroupMember::where('user_id', $userId)
+            ->where('group_id', $groupId)
+            ->where('role', 'member_request')
+            ->update(['role' => 'member']);
+
+        return response()->json(['message' => 'User role set to member successfully.']);
+    }
+
+    /**
+     * Set user role to mod.
+     *
+     * @param Request $request
+     * @param int $groupId
+     * @param int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setMod(Request $request, $groupId, $userId)
+    {
+        $adminId = $request->header('user_id');
+
+        // Check if the user making the request is an admin
+        $isAdmin = GroupMember::where('user_id', $adminId)->where('role', 'admin')->exists();
+
+        if (!$isAdmin) {
+            return response()->json(['message' => 'You are not authorized to set user roles.'], 403);
+        }
+
+        // Update the role to mod from mod_request
+        GroupMember::where('user_id', $userId)
+            ->where('group_id', $groupId)
+            ->where('role', 'mod_request')
+            ->update(['role' => 'mod']);
+
+        return response()->json(['message' => 'User role set to mod successfully.']);
     }
 }
