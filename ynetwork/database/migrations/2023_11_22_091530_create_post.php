@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('likes')->default(0);
-            $table->integer('dislikes')->default(0);
+            //$table->integer('likes')->default(0);
+            //$table->integer('dislikes')->default(0);
             $table->string('content');
             $table->string('subject');
 

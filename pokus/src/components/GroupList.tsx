@@ -26,13 +26,24 @@ const GroupList: React.FC = /* async */ () => {
     fetchGroups();
   }, []);
 
+  const handleRegister = async (groupId: number) => {
+    console.log('sending reg req');
+    //console.log('Axios configuration:', axios.defaults.headers.common);
+    try{
+      const response = await axios.post(`${apiUrl}/api/group-register/${groupId}`);
+      console.log('Registration succesful', response.data);
+    } catch (error){
+      console.error('Error registering', error);
+    }
+  };
+
   return (
     <div className="group-list">
       {groups.map(group => (
         <div key={group.id} className="group-item">
           <span className="group-name">{group.name}</span>
           <span className="group-desc">{group.description}</span>
-          <button className="register-button">Register</button>
+          <button className="register-button" onClick={() => handleRegister(group.id)} >Register</button>
         </div>
       ))}
     </div>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('group_id')->references('id')->on('_group')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->enum('role', ['user', 'admin', 'mod'])->default('user');
+            $table->enum('role', ['member', 'admin', 'mod', 'member_request', 'mod_request']);
 
         });
     }

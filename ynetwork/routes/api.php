@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\InterestController;
+use App\Http\Controllers\GroupMemberController;
 
 
 /*
@@ -59,12 +60,19 @@ Route::get('/groups/{id}', [GroupController::class, 'read']);
 Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'delete']);
 
+//GroupMemberController routes
+Route::post('/group-register/{groupId}/', [GroupMemberController::class,'requestMembership']);
+//group-register`, {groupId});
 
+//Interest routes, tbd
 Route::get('/interests', [InterestController::class, 'index']);
 Route::post('/interests', [InterestController::class, 'create']);
 Route::get('/interests/{id}', [InterestController::class, 'read']);
 Route::put('/interests/{id}', [InterestController::class, 'update']);
 Route::delete('/interests/{id}', [InterestController::class, 'delete']);
+
+
+
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
