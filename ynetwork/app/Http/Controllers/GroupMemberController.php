@@ -82,4 +82,43 @@ class GroupMemberController extends Controller
 
         return response()->json(['admin_groups' => $adminGroups]);
     }
+
+    public function getMembershipReq(Request $request, $groupId = null){
+        $userId = $request->header('user_id');
+        $isAdmin = GroupMember::where('user_id', $userId)->where('role','admin')->exists();
+        if(!$isAdmin){
+            return response()->json(['message'=> 'You are not authorized'], 403);
+        }
+        $membershipRequests = GroupMember::where('role', 'member_request')
+        ->whereIn('group_id', function ($query) use ($userId) {
+            $query->select('group_id')
+                ->from('group_member')
+                ->where('user_id', $userId)
+                ->where('role', 'admin');
+        })
+        ->with(['group:id,name,description', 'user:id,login'])
+        ->get();
+        return response()->json(['membership_requests'=> $membershipRequests]);
+    }
+
+    public function getModReq(Request $request, $groupId = null)
+    {
+        $userId = $request->header('user_id');
+
+        $isAdmin = GroupMember::where('user_id', $userId)->where('role', 'admin')->exists();
+
+        if (!$isAdmin) {
+            return response()->json(['message' => 'You are not authorized'], 403);
+        }
+
+        $moderatorRequests = GroupMember::where('user_id', $userId)
+            ->where('role', 'mod_request')
+            ->when($groupId, function ($query) use ($groupId) {
+                $query->where('group_id', $groupId);
+            })
+            ->with(['group:id,name,description', 'user:id,login'])
+            ->get();
+
+        return response()->json(['moderator_requests' => $moderatorRequests]);
+    }
 }

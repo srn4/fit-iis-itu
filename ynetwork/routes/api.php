@@ -69,6 +69,10 @@ Route::post('/group-mod-request/{groupId}', [GroupMemberController::class, 'requ
 Route::get('/user-groups', [GroupMemberController::class, 'getUserGroups']);
 //get admin groups
 Route::get('/admin-groups', [GroupMemberController::class, 'getAdminGroups']);
+//get group membership requests
+Route::get('/membership-requests/{groupId?}', [GroupMemberController::class, 'getMembershipReq']);
+//get mod reqs
+Route::get('/moderator-requests/{groupId?}', [GroupMemberController::class, 'getModReq']);
 
 //Interest routes, tbd
 Route::get('/interests', [InterestController::class, 'index']);
