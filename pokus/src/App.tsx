@@ -8,6 +8,7 @@ import GroupsPage from "./pages/GroupsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateGroupsPage from "./pages/CreateGroupsPage";
 import UserDetailPage from "./pages/UserDetailPage";
+import AdminUsersPage from "./pages/AdminUsersPage";
 
 
 function App() {
@@ -37,6 +38,12 @@ function App() {
           <Route path="create-group"
             element={
               <ProtectedRoute><CreateGroupsPage/></ProtectedRoute>
+            }
+          />
+
+          <Route path="/admin/users" 
+            element={
+            <ProtectedRoute><AdminUsersPage/></ProtectedRoute> 
             }
           />
           {/* Fallback route for unknown paths */}

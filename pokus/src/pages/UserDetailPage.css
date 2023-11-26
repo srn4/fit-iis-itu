@@ -8,12 +8,14 @@
   background: #114305;
   color: white;
   min-height: 100vh;
+  font-family: 'Roboto', sans-serif; /* Font family */
+  background: linear-gradient(180deg, #114305 32%, #1a1c1a); /* Linear gradient background */
 }
 
 .user-detail-page-container h1 {
   margin-bottom: 10px;
   font-size: 5em;
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 /* Add more styles as needed */

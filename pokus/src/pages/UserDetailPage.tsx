@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import UserDetailForm from '../components/UserDetailForm'; // Path to your UserDetailForm component
-import { AuthContext } from '../contexts/Authorization'; // Import the AuthContext
-import './UserDetailPage.css'; // Path to your UserDetailPage CSS file
+import React, { useContext } from "react";
+import UserDetailForm from "../components/UserDetailForm"; // Path to your UserDetailForm component
+import { AuthContext } from "../contexts/Authorization"; // Import the AuthContext
+import "./UserDetailPage.css"; // Path to your UserDetailPage CSS file
 
 // Replace 'any' with your actual user type
 interface User {
@@ -21,7 +21,11 @@ const UserDetailPage: React.FC = () => {
   return (
     <div className="user-detail-page-container">
       <h1>Nastavení účtu</h1>
-      <UserDetailForm user={user} onUpdate={handleUserUpdate} onLogout={logout}/>
+      <UserDetailForm
+        user={user}
+        onUpdate={handleUserUpdate}
+        onLogout={logout}
+      />
     </div>
   );
 };

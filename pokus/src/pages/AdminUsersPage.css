@@ -1,0 +1,55 @@
+/* AdminUsersPage.css */
+
+.admin-users-container {
+    min-height: 100vh; /* 100% of the viewport height */
+    padding: 20px;
+    width: 100%; /* Ensure it takes the full width if not already */
+    margin: 0; /* Remove any margin */
+    background: linear-gradient(180deg, #114305 32%, #1a1c1a); /* Linear gradient background */
+    color: rgb(197, 194, 194); /* Text color */
+    font-family: 'Roboto', sans-serif; /* Font family */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .admin-users-container h1{
+    font-size: 3em;
+  }
+  .admin-users-list {
+    list-style-type: none;
+    padding: 0;
+    width: 500px;
+  }
+  
+  .admin-user-item {
+    background-color: #6b6969;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-user-info {
+    font-size: 1.5em;
+  }
+  
+  .admin-page-delete-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 0px;
+  }
+  
+  .delete-button:hover {
+    background-color: #c9302c;
+  }
+  
