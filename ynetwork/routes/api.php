@@ -73,6 +73,14 @@ Route::get('/admin-groups', [GroupMemberController::class, 'getAdminGroups']);
 Route::get('/membership-requests/{groupId?}', [GroupMemberController::class, 'getMembershipReq']);
 //get mod reqs
 Route::get('/moderator-requests/{groupId?}', [GroupMemberController::class, 'getModReq']);
+//decline member request
+Route::delete('/decline-membership/{groupId}/{userId}', [GroupMemberController::class, 'declineMembershipRequest']);
+//decline mod request
+Route::delete('/decline-mod-request/{groupId}/{userId}', [GroupMemberController::class, 'declineModRequest']);
+//accept member req
+Route::patch('/set-member/{groupId}/{userId}', [GroupMemberController::class, 'setMember']);
+//accept mod req
+Route::patch('/set-mod/{groupId}/{userId}', [GroupMemberController::class, 'setMod']);
 
 //Interest routes, tbd
 Route::get('/interests', [InterestController::class, 'index']);
