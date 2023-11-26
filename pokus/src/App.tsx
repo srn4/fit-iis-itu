@@ -7,6 +7,7 @@ import RegistrationPage from "./pages/RegistrePage";
 import GroupsPage from "./pages/GroupsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateGroupsPage from "./pages/CreateGroupsPage";
+import UserDetailPage from "./pages/UserDetailPage";
 
 
 function App() {
@@ -22,6 +23,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <GroupsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/user-settings"
+            element={
+              <ProtectedRoute>
+                <UserDetailPage />
               </ProtectedRoute>
             }
           />

@@ -5,7 +5,8 @@ import { apiUrl } from "../constants";
 // Defining the shape of the context's value
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: any;
+  user: any; // Consider replacing 'any' with a more specific type for your user
+  setUser: React.Dispatch<React.SetStateAction<any>>; // Replace 'any' with your user type
   login: (login: string, password: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
@@ -80,6 +81,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+
+
   // Function to handle logout
   const logout = () => {
     localStorage.removeItem("auth_token");
@@ -88,10 +91,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, loading }}>
-      {children} 
+    <AuthContext.Provider value={{ isAuthenticated, user, setUser, login, logout, loading }}>
+      {children}
     </AuthContext.Provider>
   );
+  
 };
 
 export default AuthProvider;
