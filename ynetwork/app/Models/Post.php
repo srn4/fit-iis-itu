@@ -21,6 +21,11 @@ class Post extends Model
         return $this->hasMany(PostLike::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Assuming the related model is 'User'
+    }
+
     public function reactionCounts()
     {
         return $this->likes->groupBy('reaction')->mapWithKeys(function ($group, $key) {

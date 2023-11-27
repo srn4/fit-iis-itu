@@ -17,10 +17,14 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $request->validate([
+            'user_id' => 'required|numeric',
+            'group_id' => 'required|numeric',
             'content' => 'required|string',
             'subject' => 'required|string|max:255'
         ]);
         $post = Post::create($request->all());
+
+        $post->load('user');
 
         return response()->json(['post' => $post], 201);
     }
@@ -50,42 +54,79 @@ class PostController extends Controller
 
     public function getPostGroup(Request $request, $group_id)
     {
-        $posts = Post::where('group_id', $group_id)->get();
+        $userId = $request->header('user_id'); // You may want to use auth()->id() if you're using Laravel's authentication.
 
-        if ($posts->count() === 0) {
-            return response()->json(['message' => 'No posts found for the specified group.'], 200);
+        $posts = Post::where('group_id', $group_id)
+            ->with('user')
+            ->withCount([
+                'likes as likes_count',
+                'likes as dislikes_count' => function ($query) {
+                    $query->where('reaction', 'dislike');
+                }
+            ])
+            ->get();
+
+        // Optionally, add the user's reaction to each post
+        foreach ($posts as $post) {
+            $userReaction = $post->likes()
+                ->where('user_id', $userId)
+                ->first();
+            $post->user_reaction = $userReaction ? $userReaction->reaction : null;
         }
 
         return response()->json(['posts' => $posts]);
     }
 
+
     public function reactToPost(Request $request, $postId)
     {
-        $userId = $request->header('user_id'); // Get the user ID from the request header
+        $userId = $request->header('user_id'); // Or use auth()->id() if you're using Laravel's authentication
 
-        // Check if the user already reacted to the post
-        $existingReaction = PostLike::where('user_id', $userId)
-            ->where('post_id', $postId)
-            ->first();
-
-        if ($existingReaction) {
-            // User already reacted, update the reaction
-            $existingReaction->update([
-                'reaction' => $request->input('reaction')
-            ]);
-
-            return response()->json(['message' => 'Reaction updated successfully.']);
-        }
-
-        // User is reacting for the first time, create a new record
-        PostLike::create([
-            'user_id' => $userId,
-            'post_id' => $postId,
-            'reaction' => $request->input('reaction')
+        // Validate the reaction input
+        $validatedData = $request->validate([
+            'reaction' => 'nullable|in:like,dislike'
         ]);
 
-        return response()->json(['message' => 'Reaction added successfully.']);
+        $reaction = $validatedData['reaction'];
+
+        // Check if the user already reacted to the post
+        $existingReaction = PostLike::where('post_id', $postId)
+                                ->where('user_id', $userId)
+                                ->first();
+
+        if ($existingReaction) {
+            if ($existingReaction->reaction === $reaction || $reaction === null) {
+                // Remove the reaction if it's the same or if new reaction is null
+                $existingReaction->delete();
+            } else {
+                // Update the reaction if different
+                $existingReaction->update(['reaction' => $reaction]);
+            }
+        } else {
+            if ($reaction !== null) {
+                // Create a new reaction record
+                PostLike::create([
+                    'user_id' => $userId,
+                    'post_id' => $postId,
+                    'reaction' => $reaction
+                ]);
+            }
+        }
+
+        // Fetch updated counts
+        $post = Post::with('user')->findOrFail($postId);
+        $likes_count = $post->likes()->where('reaction', 'like')->count();
+        $dislikes_count = $post->likes()->where('reaction', 'dislike')->count();
+
+        return response()->json([
+            'message' => 'Reaction updated successfully.',
+            'likes_count' => $likes_count,
+            'dislikes_count' => $dislikes_count,
+            'user_reaction' => $reaction
+        ]);
     }
+
+
 
     public function countReactions(Request $request, $postId, $reaction)
     {

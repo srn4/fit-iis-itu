@@ -1,0 +1,141 @@
+/* GroupPostsPage.css */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px; /* Adjust based on your preference */
+    margin: auto;
+  }
+
+.group-posts-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #6b6b6b;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 65%;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  
+  /* Apply the linear gradient to the body or a surrounding container */
+  .body-background {
+    background: linear-gradient(180deg, #114305 32%, #1a1c1a);
+    min-height: 100vh;
+    color: white; /* Adjust text color for readability */
+  }
+  
+  .group-title {
+    text-align: center;
+    color: #ccc9c9; /* Changed for better visibility on dark background */
+    margin-bottom: 20px;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .post-item {
+    background-color: #aaa8a8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 2px solid #007bff; /* Blue colored frame for posts */
+  }
+  
+  .post-subject {
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .post-content {
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .posts-and-form-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .post-form {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 20px; /* Spacing between the list and the form */
+    width: 30%; /* Adjust as needed */
+    height: 330px;
+  }
+  
+  .form-input, .form-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+
+  .form-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    height: 150px; /* Increased height for the textarea */
+  }
+  
+  .form-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .reaction-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between buttons and counters */
+  }
+  
+  .reaction-buttons button {
+    padding: 0px 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 2em;
+
+  }
+  
+  .reaction-buttons button:disabled {
+    cursor: default;
+    opacity: 0.7;
+  }
+  
+  .reaction-buttons button.like-button {
+    background-color: #4caf50; /* Green background for like button */
+  }
+  
+  .reaction-buttons button.dislike-button {
+    background-color: #f44336; /* Red background for dislike button */
+  }
+  
+  .reaction-buttons button.like-button:disabled {
+    background-color: #81c784; /* Lighter green to indicate it's selected/disabled */
+  }
+  
+  .reaction-buttons button.dislike-button:disabled {
+    background-color: #e57373; /* Lighter red to indicate it's selected/disabled */
+  }
+  
+  
+  
