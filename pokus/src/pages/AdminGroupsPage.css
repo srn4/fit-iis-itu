@@ -1,0 +1,75 @@
+/* AdminGroupsPage.css */
+.admin-groups-page {
+    padding: 2rem;
+    background: #f0f0f0; /* Light grey background */
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  .admin-groups-title {
+    color: #333; /* Dark grey color for the title */
+    margin-bottom: 1rem;
+  }
+  
+  .admin-groups-list {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+    max-width: 600px; /* Set a max-width for the list */
+    margin: auto; /* Center the list */
+  }
+  
+  .admin-group-item {
+    background: #fff; /* White background for list items */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 1rem;
+    margin-bottom: 1rem; /* Add some space between items */
+    border-radius: 4px; /* Slightly rounded corners for polish */
+    display: flex;
+    justify-content: space-between; /* Space items out */
+    align-items: center; /* Align items vertically */
+  }
+  
+  .admin-group-item:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow on hover for interactivity */
+  }
+  
+  .group-name,
+  .group-description {
+    margin: 0; /* Reset margins */
+  }
+  .group-actions {
+    display: flex;
+    gap: 0.5rem; /* Adjust the space between buttons */
+    align-items: center; /* Align the buttons vertically */
+    /* Add any other styling that is necessary to override other CSS */
+  }
+  
+  .group-actions .view-requests-button,
+  .group-actions .delete-group-button {
+    /* Common button styles */
+    padding: 0.5rem 1rem; /* Padding around the text */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-align: center; /* Center the text inside the button */
+    text-decoration: none; /* No underline */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  .group-actions .view-requests-button {
+    background-color: #4CAF50; /* Green background for view requests button */
+    color: white;
+  }
+  
+  .group-actions .view-requests-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .group-actions .delete-group-button {
+    background-color: #f44336; /* Red background for delete button */
+    color: white;
+  }
+  
+  .group-actions .delete-group-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }

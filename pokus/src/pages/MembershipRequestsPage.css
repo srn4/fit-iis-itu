@@ -1,0 +1,71 @@
+.membership-requests-page {
+    padding: 2rem;
+    background: #f0f0f0; /* Light grey background */
+    min-height: 100vh; /* Full height of the viewport */
+  }
+  
+  .membership-requests-title {
+    color: #333; /* Dark grey color for the title */
+    margin-bottom: 1rem;
+  }
+  
+  .membership-requests-list {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0;
+    max-width: 600px; /* Set a max-width for the list */
+    margin: auto; /* Center the list */
+  }
+  
+  .request-item {
+    background: #fff; /* White background for list items */
+    border: 1px solid #ddd; /* Light grey border */
+    padding: 1rem;
+    margin-bottom: 1rem; /* Add some space between items */
+    border-radius: 4px; /* Slightly rounded corners for polish */
+    display: flex;
+    justify-content: space-between; /* Space items out */
+    align-items: center; /* Align items vertically */
+  }
+  
+  .request-item:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow on hover for interactivity */
+  }
+  
+  .request-info {
+    margin: 0; /* Reset margins */
+  }
+  
+  .request-action-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .accept-button,
+  .decline-button {
+    padding: 0.5rem 1rem; /* Padding around the text */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-align: center; /* Center the text inside the button */
+    text-decoration: none; /* No underline */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  .accept-button {
+    background-color: #4CAF50; /* Green background for accept button */
+    color: white;
+  }
+  
+  .accept-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .decline-button {
+    background-color: #f44336; /* Red background for decline button */
+    color: white;
+  }
+  
+  .decline-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }
