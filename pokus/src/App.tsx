@@ -11,6 +11,7 @@ import UserDetailPage from "./pages/UserDetailPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import AdminGroupsPage from "./pages/AdminGroupsPage";
 import MembershipRequestsPage from "./pages/MembershipRequestsPage";
+import MemberGroupsPage from "./pages/MemberGroupsPage";
 
 function App() {
   return (
@@ -45,14 +46,21 @@ function App() {
             }
           />
           <Route
-            path="/my-groups"
+            path="/my-admin-groups"
             element={
               <ProtectedRoute>
                 <AdminGroupsPage />
               </ProtectedRoute>
             }
           />
-
+          <Route
+            path="/my-member-groups"
+            element={
+              <ProtectedRoute>
+                <MemberGroupsPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/membership-requests/:groupId"
             element={

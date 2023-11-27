@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* This will center align the group items */
+  overflow-y: auto;
+  height: 100%;
 }
 
 .group-item {
@@ -20,6 +22,7 @@
   display: flex;
   justify-content: space-between; /* This separates the group name and the 'Register' button */
   align-items: center;
+  margin-bottom: 10px;
 }
 .group-name {
   font-size: 1.5em; /* Adjust font size as needed */

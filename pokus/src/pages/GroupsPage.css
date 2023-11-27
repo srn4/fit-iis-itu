@@ -32,39 +32,44 @@
   color: #333;
 }
 
-.user-profile {
-  flex-shrink: 0; /* Prevent the user profile from shrinking */
-  margin-left: 10px; /* Add space between search bar and profile display */
-}
-
 .main-content {
   width: 100%;
-  padding: 20px;
+  max-width: 1200px; /* Adjust as needed */
+  height: 400px; /* Fixed height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-bottom: 20px; /* Space below the list before the footer */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Adjust group item width and add margin for spacing */
-.group-item {
-  width: 80%; /* Adjust the width to your preference */
-  max-width: 600px; /* Set a max-width to control the size on larger screens */
-  margin-bottom: 10px; /* Add some space between the group items */
-}
-
 .footer {
   width: 100%;
-  padding: 10px 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 .create-group-button {
+  order: -1; /* Ensure this button is always to the left */
   background-color: #0288d1;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-  margin-top: 20px;
   cursor: pointer;
+  margin-right: auto; /* Push the button to the left */
+}
+
+.view-admin-groups-button,
+.view-member-groups-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 10px; /* Space between buttons */
 }
