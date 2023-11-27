@@ -41,6 +41,13 @@ class PostController extends Controller
         $post->delete();
         return response()->json(['message'=> 'succesful deletion']);
     }
+
+    public function getPostGroup(Request $request, $group_id){
+        $posts = Post::where('group_id', $group_id)->get();
+        return response()->json(['post'=> $posts]);
+    }
+
+
     //tbd check the post model funcs
     /* public function reactToPost(Request $request, $post_id, $reaction){
         $post = Post::findOrFail($post_id);

@@ -13,6 +13,9 @@ class Post extends Model
 
     protected $fillable = ['likes','dislikes','content','subject','group_id', 'user_id'];
 
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
     public function likes()
     {
         return $this->hasMany(PostLike::class);

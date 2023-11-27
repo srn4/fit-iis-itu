@@ -52,6 +52,8 @@ Route::get('/posts/{id}', [PostController::class,'read']);
 Route::put('/posts/{id}', [PostController::class,'update']);
 //delete one post by id
 Route::delete('/posts/{id}', [PostController::class,'delete']);
+//get posts in group
+Route::get('/posts/{group_id}', [PostController::class, 'getPostGroup']);
 
 //GroupController routes
 Route::get('/groups', [GroupController::class, 'index']);
