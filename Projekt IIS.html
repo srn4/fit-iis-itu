@@ -47,11 +47,7 @@
 
 <h3>Video</h3>
 
-<p>P�ilo�te odkaz na komentovan� video demostruj�c� pou�it� informa�n�ho
- syst�mu. Zam��te se na p��pady u�it� definovan� zad�n�m (nap�. 
-registrace u�ivatele, spr�va u�ivatel� a �innosti jednotliv�ch rol�). 
-Video nahrajte nap��klad na VUT Google Drive, kde ho bude mo�n� p��mo 
-spustit z odkazu.</p> 
+<p><a href="https://youtu.be/FkyjIWP2Zp0">https://youtu.be/FkyjIWP2Zp0</a></p> 
 
 <h2>Implementace</h2>
 <p>Stru�n� dokumentace k implementaci, kter� popisuje, kter� ��sti 
@@ -90,6 +86,8 @@ Stručně popište:
 	<li>Nefunguje používání aplikace pro neregistrované návštěvníky.</li>
 	<li>Like a dislike fungují omezeně, lze jen dát like nebo dislike. Reakce se už nedá změnit.</li>
 	<li>Nefunguje správa obsahu skupiny, moderace skupiny, žádosti o moderace, nastavení zabezpečení - tyto chyby jsou v rámci frontendu, na úrovni backendu jsou controllery hotové</li>
+	<li>Při deployi jsme narazili na chybu, kde na stránce pro zobrazení všech skupin se nevyrenderují tlačítko na správu požadavků na registraci do skupiny a zobrazení skupin, kde je uživatel member.</li>
+	<li>Prosím použijte i lokální zapnutí, kde by vše mělo fungovat, problém je nejspíše ve volání API, kde používáme HTTP protokol, ale stránka na deploy používá HTTPS protokol.</li>
 </ul>
 
 
