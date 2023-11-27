@@ -12,6 +12,7 @@ import AdminUsersPage from "./pages/AdminUsersPage";
 import AdminGroupsPage from "./pages/AdminGroupsPage";
 import MembershipRequestsPage from "./pages/MembershipRequestsPage";
 import MemberGroupsPage from "./pages/MemberGroupsPage";
+import GroupPostsPage from "./pages/GroupPostsPage";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/groups/:groupId/posts" element={<GroupPostsPage />} />
           <Route
             path="/membership-requests/:groupId"
             element={

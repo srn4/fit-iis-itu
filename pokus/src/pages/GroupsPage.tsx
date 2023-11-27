@@ -49,25 +49,28 @@ const GroupsPage = () => {
         <input type="text" className="search-bar" placeholder="Search..." />
         {user && <ProfileDisplay user={user} />}
       </div>
-      
-      <div className="main-content">
-        <GroupList />
-      </div>
-      <div className="footer">
-        <button className="create-group-button" onClick={handleCreateGroup}>Vytvořit skupinu</button>
-        {isAdminOfAnyGroup && (
-          <button className="view-admin-groups-button" onClick={handleViewAdminGroups}>
-            Spravovat skupiny
-          </button>
-        )}
-        {isMemberOfAnyGroup && (
-          <button className="view-member-groups-button" onClick={handleViewMemberGroups}>
-            Zobrazit skupiny
-          </button>
-        )}
+      <div className="content-container">
+        <div className="main-content">
+          <button className="create-group-button" onClick={handleCreateGroup}>Vytvořit skupinu</button>
+          <GroupList />
+        </div>
+        <div className="side-actions">
+          {isAdminOfAnyGroup && (
+            <button className="view-admin-groups-button" onClick={handleViewAdminGroups}>
+              Spravovat moje skupiny
+            </button>
+          )}
+          {isMemberOfAnyGroup && (
+            <button className="view-member-groups-button" onClick={handleViewMemberGroups}>
+              Zobrazit skupiny
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
+  
+  
 };
 
 export default GroupsPage;

@@ -11,9 +11,9 @@
 }
 
 .group-item {
-  background-color: #fff; /* For visibility against the gradient background */
+  background-color: #d1d0d0; /* For visibility against the gradient background */
   color: #333; /* For better readability */
-  padding: 10px;
+  padding: 15px;
   margin: 10px 0;
   width: 80%; /* Adjust width as needed */
   max-width: 600px; /* Or whatever maximum width you prefer */
@@ -24,19 +24,22 @@
   align-items: center;
   margin-bottom: 10px;
 }
+
 .group-name {
   font-size: 1.5em; /* Adjust font size as needed */
 }
 
-.group-register-button {
+.group-item .register-button { /* Modified this selector for higher specificity */
   padding: 5px 15px;
-  background-color: #0288d1; /* Adjust color to fit your design */
+  background-color: #19ad3b; /* Adjust color to fit your design */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 20px; /* Size adjusted as requested */
 }
 
-.group-register-button:hover {
+.register-button:hover {
   background-color: #0277bd; /* Darker shade for hover state */
 }
+

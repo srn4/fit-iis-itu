@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './GroupList.css'; // Ensure you have a CSS file for this component
+import './GroupList.css';
 import { apiUrl } from '../constants';
 import axios from 'axios';
 
@@ -43,7 +43,7 @@ const GroupList: React.FC = /* async */ () => {
         <div key={group.id} className="group-item">
           <span className="group-name">{group.name}</span>
           <span className="group-desc">{group.description}</span>
-          <button className="register-button" onClick={() => handleRegister(group.id)} >Register</button>
+          <button className="register-button" onClick={() => handleRegister(group.id)} >Registrovat</button>
         </div>
       ))}
     </div>

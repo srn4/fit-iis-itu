@@ -32,35 +32,39 @@
   color: #333;
 }
 
-.main-content {
+.content-container {
   width: 100%;
-  max-width: 1200px; /* Adjust as needed */
-  height: 400px; /* Fixed height */
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start; /* Align the start of the content and side actions */
+}
+
+.main-content {
+  flex-grow: 1;
+  max-width: calc(100% - 240px); /* Adjust the width of the main content based on the width of the side actions */
+  height: 650px; /* Fixed height */
   overflow-y: auto; /* Enable vertical scrolling */
   margin-bottom: 20px; /* Space below the list before the footer */
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 20px; /* Add padding between content and buttons */
+  margin-top: 30px;
 }
 
-.footer {
-  width: 100%;
+.side-actions {
+  flex-shrink: 0; /* Prevent side actions from shrinking */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-end; /* Align buttons to the right */
+  padding-left: 20px; /* Add padding between content and buttons */
 }
 
 .create-group-button {
-  order: -1; /* Ensure this button is always to the left */
-  background-color: #0288d1;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-right: auto; /* Push the button to the left */
+  margin-bottom: 10px; /* Space between create button and group list */
+  align-self: center; /* Center the button */
+  font-size: 2em;
 }
 
 .view-admin-groups-button,
@@ -71,5 +75,6 @@
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
-  margin-left: 10px; /* Space between buttons */
+  margin-bottom: 10px; /* Space between buttons */
+  font-size: 2em;
 }
