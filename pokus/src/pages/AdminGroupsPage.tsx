@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/Authorization";
 import "./AdminGroupsPage.css";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../constants";
 
 interface Group {
   id: number;
@@ -24,7 +25,7 @@ const AdminGroupsPage = () => {
       const fetchAdminGroups = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:8000/api/admin-groups",
+            `${apiUrl}/api/admin-groups`,
             {
               headers: { user_id: user.id },
             }
@@ -32,7 +33,7 @@ const AdminGroupsPage = () => {
           setAdminGroups(response.data.admin_groups);
         } catch (error) {
           console.error("Error fetching admin groups:", error);
-          // Add state to show error message to the user
+          
         }
       };
 
@@ -43,7 +44,7 @@ const AdminGroupsPage = () => {
   const deleteGroup = async (groupId: number) => {
     if (window.confirm("Are you sure you want to delete this group?")) {
       try {
-        await axios.delete(`http://localhost:8000/api/groups/${groupId}`);
+        await axios.delete(`${apiUrl}/api/groups/${groupId}`);
         // Filter out the deleted group from the adminGroups state
         setAdminGroups(
           adminGroups.filter(

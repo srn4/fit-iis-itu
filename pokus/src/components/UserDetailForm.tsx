@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./UserDetailForm.css"; // Make sure to create a corresponding CSS file
+import "./UserDetailForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../constants";
 
 interface UserDetailFormProps {
   user: {
@@ -32,7 +33,7 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
 
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/users/${user.id}`,
+        `${apiUrl}/api/users/${user.id}`,
         {
           name: name,
           surname: surname,
@@ -43,7 +44,7 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
       // Call onUpdate to update the parent state
       onUpdate(response.data.user);
 
-      // You might want to do some action on success, like showing a message or redirecting
+      
       setUpdateSuccess("Změna provedena!");
     } catch (error) {
       // Handle the error, maybe set an error state and show it in the UI
@@ -63,7 +64,7 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
     ) {
       try {
         const response = await axios.delete(
-          `http://localhost:8000/api/users/${user.id}`
+          `${apiUrl}/api/users/${user.id}`
         );
         alert("User deleted successfully!");
         onLogout(); // Log out the user after account deletion

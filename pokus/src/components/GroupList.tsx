@@ -14,7 +14,7 @@ const GroupList: React.FC = /* async */ () => {
   const [groups, setGroups] = useState<Group[]>([]);
 
   useEffect(() => {
-    console.log('${apiUrl}/api/groups');
+    console.log(`${apiUrl}/api/groups`);
     const fetchGroups = async () => {
       try {
         const groups = await axios.get(`${apiUrl}/api/groups`);
@@ -28,7 +28,6 @@ const GroupList: React.FC = /* async */ () => {
 
   const handleRegister = async (groupId: number) => {
     console.log('sending reg req');
-    //console.log('Axios configuration:', axios.defaults.headers.common);
     try{
       const response = await axios.post(`${apiUrl}/api/group-register/${groupId}`);
       console.log('Registration succesful', response.data);

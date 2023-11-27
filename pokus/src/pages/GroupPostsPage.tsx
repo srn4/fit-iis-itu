@@ -10,7 +10,6 @@ interface Group {
   id: number;
   name: string;
   description: string;
-  // Add other properties as needed
 }
 interface User {
   id: number;

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/Authorization";
 import "./MembershipRequestsPage.css"
+import { apiUrl } from "../constants";
 
 interface User {
   id: number;
@@ -34,7 +35,7 @@ const MembershipRequestsPage: React.FC = () => {
       if (user && groupId) {
         try {
           const response = await axios.get(
-            `http://localhost:8000/api/membership-requests/${groupId}`,
+            `${apiUrl}/api/membership-requests/${groupId}`,
             {
               headers: { user_id: user.id },
             }
@@ -58,7 +59,7 @@ const MembershipRequestsPage: React.FC = () => {
   const acceptRequest = async (userId: number) => {
     try {
       const response = await axios.patch(
-        `http://localhost:8000/api/set-member/${groupId}/${userId}`,
+        `${apiUrl}/api/set-member/${groupId}/${userId}`,
         {},
         {
           headers: { user_id: user?.id },
@@ -79,7 +80,7 @@ const MembershipRequestsPage: React.FC = () => {
     ) {
       try {
         const response = await axios.delete(
-          `http://localhost:8000/api/decline-membership/${groupId}/${userId}`,
+          `${apiUrl}/api/decline-membership/${groupId}/${userId}`,
           {
             headers: { user_id: user?.id },
           }

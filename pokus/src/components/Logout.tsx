@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import { apiUrl } from '../constants';
 
 function Logout() {
     const handleLogout = async () => {
         try {
             const token = localStorage.getItem('token'); // Retrieve the stored token
-            await axios.post('http://localhost:8000/api/logout', {}, {
+            await axios.post(`${apiUrl}/api/logout`, {}, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

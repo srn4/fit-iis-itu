@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AdminUsersPage.css";
+import { apiUrl } from "../constants";
 
 interface User {
   id: number;
   name: string;
   role: string;
   login: string;
-  // include any other properties that a user might have
 }
 
 const AdminUsersPage = () => {
@@ -16,7 +16,7 @@ const AdminUsersPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/users");
+        const response = await axios.get(`${apiUrl}/api/users`);
         setUsers(response.data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -29,7 +29,7 @@ const AdminUsersPage = () => {
   const deleteUser = async (userId: number) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await axios.delete(`http://localhost:8000/api/users/${userId}`);
+        await axios.delete(`${apiUrl}/api/users/${userId}`);
         setUsers(users.filter((user) => user.id !== userId)); // Remove the user from the state
         alert("User deleted successfully.");
       } catch (error) {

@@ -5,8 +5,8 @@ import { apiUrl } from "../constants";
 // Defining the shape of the context's value
 interface AuthContextType {
   isAuthenticated: boolean;
-  user: any; // Consider replacing 'any' with a more specific type for your user
-  setUser: React.Dispatch<React.SetStateAction<any>>; // Replace 'any' with your user type
+  user: any;
+  setUser: React.Dispatch<React.SetStateAction<any>>;
   login: (login: string, password: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
@@ -26,7 +26,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true); // Add a loading state
 
-  // This useEffect should be responsible for token validation
+  
   useEffect(() => {
     console.log("Checking for token...");
     const token = localStorage.getItem("auth_token");

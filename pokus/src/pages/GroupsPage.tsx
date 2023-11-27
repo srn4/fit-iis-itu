@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/Authorization"; // Import the AuthConte
 import "./GroupsPage.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { apiUrl } from "../constants";
 
 //import { useHistory } from 'react-router-dom';
 
@@ -18,13 +19,13 @@ const GroupsPage = () => {
     const fetchGroupRoles = async () => {
       try {
         const adminResponse = await axios.get(
-          "http://localhost:8000/api/admin-groups",
+          `${apiUrl}/api/admin-groups`,
           { headers: { user_id: user.id } }
         );
         setIsAdminOfAnyGroup(adminResponse.data.admin_groups.length > 0);
 
         const memberResponse = await axios.get(
-          "http://localhost:8000/api/user-groups",
+          `${apiUrl}/api/user-groups`,
           { headers: { user_id: user.id } }
         );
         setIsMemberOfAnyGroup(memberResponse.data.member_groups.length > 0);

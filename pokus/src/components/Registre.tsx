@@ -2,6 +2,7 @@ import React, { useState, FormEvent } from 'react';
 import axios from 'axios';
 import './Registre.css';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../constants';
 
 function Registration() {
   const [login, setLogin] = useState<string>('');
@@ -15,7 +16,7 @@ function Registration() {
     setRegistrationStatus('');
     setErrorMessage('');
     try {
-      const response = await axios.post('http://localhost:8000/api/register', { login, password });
+      const response = await axios.post(`${apiUrl}/api/register`, { login, password });
       console.log(response.data);
       setRegistrationStatus("Registration successful! Redirecting to login...");
       setTimeout(() => navigate('/login'), 3000);  // Redirect after 3 seconds
