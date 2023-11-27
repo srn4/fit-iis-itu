@@ -9,7 +9,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CreateGroupsPage from "./pages/CreateGroupsPage";
 import UserDetailPage from "./pages/UserDetailPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
-
+import AdminGroupsPage from "./pages/AdminGroupsPage";
+import MembershipRequestsPage from "./pages/MembershipRequestsPage";
 
 function App() {
   return (
@@ -35,15 +36,38 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="create-group"
+          <Route
+            path="create-group"
             element={
-              <ProtectedRoute><CreateGroupsPage/></ProtectedRoute>
+              <ProtectedRoute>
+                <CreateGroupsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-groups"
+            element={
+              <ProtectedRoute>
+                <AdminGroupsPage />
+              </ProtectedRoute>
             }
           />
 
-          <Route path="/admin/users" 
+          <Route
+            path="/membership-requests/:groupId"
             element={
-            <ProtectedRoute><AdminUsersPage/></ProtectedRoute> 
+              <ProtectedRoute>
+                <MembershipRequestsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <AdminUsersPage />
+              </ProtectedRoute>
             }
           />
           {/* Fallback route for unknown paths */}
