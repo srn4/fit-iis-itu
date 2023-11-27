@@ -40,6 +40,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           console.log("Token is valid:", response.data);
           setIsAuthenticated(true);
           setUser(response.data.user); // Assuming the user data is returned here
+
+          axios.defaults.headers.common["user_id"] = response.data.user.id;
         })
         .catch((error) => {
           console.error("Token validation failed:", error);
