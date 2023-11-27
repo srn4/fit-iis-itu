@@ -53,7 +53,7 @@ Route::put('/posts/{id}', [PostController::class,'update']);
 //delete one post by id
 Route::delete('/posts/{id}', [PostController::class,'delete']);
 //get posts in group
-Route::get('/posts/{group_id}', [PostController::class, 'getPostGroup']);
+Route::get('/posts-in-group/{group_id}', [PostController::class, 'getPostGroup']);
 //react to post
 /* call example 
 const postId = 1; // Replace with the actual post ID

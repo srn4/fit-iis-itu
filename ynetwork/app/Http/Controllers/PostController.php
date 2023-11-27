@@ -56,7 +56,7 @@ class PostController extends Controller
             return response()->json(['message' => 'No posts found for the specified group.'], 200);
         }
 
-        return response()->json(['post' => $posts]);
+        return response()->json(['posts' => $posts]);
     }
 
     public function reactToPost(Request $request, $postId)

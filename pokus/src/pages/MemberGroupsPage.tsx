@@ -3,7 +3,7 @@ import axios from "axios";
 import { AuthContext } from "../contexts/Authorization";
 import "./MemberGroupsPage.css";
 import { useNavigate } from "react-router-dom";
-
+import { apiUrl } from "../constants";
 // Define an interface for the group object
 interface Group {
   id: number;
@@ -26,7 +26,7 @@ const MemberGroupsPage = () => {
     const fetchMemberGroups = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/user-groups",
+          `${apiUrl}/api/user-groups`,
           {
             headers: { user_id: user.id },
           }
