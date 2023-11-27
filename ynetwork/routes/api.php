@@ -54,6 +54,14 @@ Route::put('/posts/{id}', [PostController::class,'update']);
 Route::delete('/posts/{id}', [PostController::class,'delete']);
 //get posts in group
 Route::get('/posts/{group_id}', [PostController::class, 'getPostGroup']);
+//react to post
+/* call example 
+const postId = 1; // Replace with the actual post ID
+const reaction = 'like'; // 'like' or 'dislike'
+axios.post(`${apiUrl}/api/post/${postId}/react`, { reaction }); */
+Route::post('/post/{postId}/react', [PostController::class, 'reactToPost']);
+//get reaction count
+Route::get('/post/{postId}/reactions/{reaction}', [PostController::class, 'countReactions']);
 
 //GroupController routes
 Route::get('/groups', [GroupController::class, 'index']);
