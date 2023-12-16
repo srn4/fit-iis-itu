@@ -31,7 +31,6 @@
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="https://pokus-5b3776a25df3.herokuapp.com/">https://pokus-5b3776a25df3.herokuapp.com/</a></dd>
-	<dd>(pokud m� aplikace v�ce vstupn�ch str�nek, napi�te obdobn� dal�� URL)</dd>
 </dl>
 
 <h2>Uživatelé systému pro testování</h2>
@@ -43,15 +42,12 @@
 <!--<tr><td>franta</td><td>franta</td><td>Z�kazn�k</td></tr> -->
 </tbody></table>
 
-<p>(Diagram p��pad� u�it� nen� nutn� vkl�dat, pokud IS implementuje role a p��pady u�it� definovan� zad�n�m.)</p> 
 
 <h3>Video</h3>
 
 <p><a href="https://youtu.be/FkyjIWP2Zp0">https://youtu.be/FkyjIWP2Zp0</a></p> 
 
 <h2>Implementace</h2>
-<p>Stru�n� dokumentace k implementaci, kter� popisuje, kter� ��sti 
-projektu (nap�. PHP skripty) implementuj� jednotliv� p��pady pou�it�.
 Backend je napsán v PHP frameworku Laravel. Každá tabulka v databázi má přiřazený svůj model, se kterým poté manipuluje controller. 
 Controllery mají definované routes v souboru api.php.
 Authentizaci má na starost AuthController.php.
@@ -60,7 +56,7 @@ Volané controllery nám poté pracují s databází a chystají odpověď v pod
 
 </p>
 
-<h3>Datab�ze</h3>
+<h3>Databáze</h3>
 
 <a href="https://lucid.app/lucidchart/ce329a27-a388-454d-8fe8-61434b893ded/edit?viewport_loc=-2048%2C-921%2C2219%2C1107%2C0_0&invitationId=inv_58513457-5863-4c12-8934-f654b479f28b">odkaz na ERD</a>
 <img src="ERD IIS.png">
@@ -68,9 +64,6 @@ Volané controllery nám poté pracují s databází a chystají odpověď v pod
 
 Stručně popište: 
 <ul>
-<li>postup instalace na server,</li>
-<li>softwarov� po�adavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat datab�zi, ...</li>
 <li>Databáze běží na externím serveru. Nemělo by tedy být potřeba žádné inicializace, nebo konfigurace.</li>
 <li>Používáme verzi PHP 8.1. </li>
 <li>Verze Laravelu je 10.29.</li>
@@ -79,15 +72,15 @@ Stručně popište:
 <li>Ve složce backend se provedou příkazy composer install a poté php artisan serve</li>
 </ul>
 
-<h2>Zn�m� probl�my</h2>
-<p>Z časových důvodů se nepovedlo implementovat ty funkcionality:</p>
+<h2>Známé problémy</h2>
+<p>Z časových důvodů se bohužel nepovedlo implementovat ty funkcionality:</p>
 <ul>
 	<li>Nastavení viditelnosti uživatele.</li>
 	<li>Nefunguje používání aplikace pro neregistrované návštěvníky.</li>
 	<li>Like a dislike fungují omezeně, lze jen dát like nebo dislike. Reakce se už nedá změnit.</li>
 	<li>Nefunguje správa obsahu skupiny, moderace skupiny, žádosti o moderace, nastavení zabezpečení - tyto chyby jsou v rámci frontendu, na úrovni backendu jsou controllery hotové</li>
-	<li>Při deployi jsme narazili na chybu, kde na stránce pro zobrazení všech skupin se nevyrenderují tlačítko na správu požadavků na registraci do skupiny a zobrazení skupin, kde je uživatel member.</li>
-	<li>Prosím použijte i lokální zapnutí, kde by vše mělo fungovat, problém je nejspíše ve volání API, kde používáme HTTP protokol, ale stránka na deploy používá HTTPS protokol.</li>
+	<li>Při deployi jsme narazili na chybu, kde na stránce pro zobrazení všech skupin se nevyrenderují tlačítko na správu požadavků na registraci do skupiny a zobrazení skupin, kde je uživatel členem.</li>
+	<li>Prosíme použijte i lokální zapnutí, kde by vše mělo fungovat, problém je nejspíše ve volání API, kde používáme HTTP protokol, ale stránka na deploy používá HTTPS protokol. Děkujeme.</li>
 </ul>
 
 
