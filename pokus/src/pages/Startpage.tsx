@@ -14,9 +14,6 @@ const HomePage: React.FC = () => {
                 <Link to="/register">
                     <button className="home-button">Registrovat</button>
                 </Link>
-                <Link to="/continue-without-signin">
-                    <button className="home-button secondary">Pokračovat bez přihlášení</button>
-                </Link>
             </div>
         </div>
     );
