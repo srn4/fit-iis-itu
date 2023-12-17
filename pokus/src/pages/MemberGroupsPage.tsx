@@ -51,7 +51,7 @@ const MemberGroupsPage = () => {
 
   return (
     <div className="member-groups-page">
-      <h1>My Member Groups</h1>
+      <h1>Členské skupiny</h1>
       <ul className="member-groups-list">
         {memberGroups.map((groupContainer) => (
           <li key={groupContainer.group.id} className="member-group-item" onClick={() => handleGroupClick(groupContainer.group.id)}>
@@ -59,7 +59,6 @@ const MemberGroupsPage = () => {
             <span className="group-description">
               {groupContainer.group.description}
             </span>
-            {/* Add any other group information you want to display */}
           </li>
         ))}
       </ul>

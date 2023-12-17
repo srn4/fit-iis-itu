@@ -1,25 +1,26 @@
 /* MemberGroupsPage.css */
 .member-groups-page {
     padding: 2rem;
-    background: #f0f0f0; /* Light grey background */
+    background: linear-gradient(180deg, #114305 32%, #1a1c1a);
     min-height: 100vh; /* Full height of the viewport */
   }
   
   .member-groups-title {
-    color: #333; /* Dark grey color for the title */
+    color: #ffffff; /* Dark grey color for the title */
     margin-bottom: 1rem;
   }
-  
+  .member-groups-page h1{
+    color: white;
+  }
   .member-groups-list {
     list-style: none; /* Remove default list styling */
     padding: 0;
     margin: 0;
-    max-width: 800px; /* Set a max-width for the list */
-    margin: auto; /* Center the list */
+    max-width: 500px; /* Set a max-width for the list */
   }
   
   .member-group-item {
-    background: #fff; /* White background for list items */
+    background: linear-gradient(180deg, #666666 0%, #a8a8a8 100%);
     border: 1px solid #ddd; /* Light grey border */
     padding: 1rem;
     margin-bottom: 1rem; /* Add some space between items */
@@ -38,11 +39,11 @@
   .group-description {
     margin: 0; /* Reset margins */
     font-weight: bold; /* Make text bold */
-    color: #444; /* Slightly darker text for better readability */
+    color: #020202; /* Slightly darker text for better readability */
   }
   
   .group-description {
     font-weight: normal; /* Regular font weight for description */
-    color: #666; /* Slightly lighter color for descriptions */
+    color: #4b4a4a; /* Slightly lighter color for descriptions */
   }
   

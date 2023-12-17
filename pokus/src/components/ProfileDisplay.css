@@ -1,7 +1,7 @@
 /* UserProfile.css */
 .user-profile {
   flex-shrink: 0; /* Prevent the user profile from shrinking */
-  margin-left: 20px; /* Space between search bar and profile display */
+  margin-left: 950px; /* Space between search bar and profile display */
   background: #d1d0d0; /* Light background for the user profile */
   padding: 10px 10px; /* Padding inside user profile */
   border-radius: 5px; /* Rounded corners for user profile */

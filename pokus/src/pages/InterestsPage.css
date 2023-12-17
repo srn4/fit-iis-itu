@@ -30,7 +30,11 @@
     gap: 10px; /* Add some space between the items */
     background: linear-gradient(180deg, #3a3939 0%, #a8a8a8 100%);
   }
-  
+  .interest-item.selected {
+    background-color: #298849; /* or your theme color */
+    color: white;
+    /* other styling as needed */
+  }
   .interest-item {
     background-color: #007bff; /* Blue background for buttons */
     color: white;
@@ -42,6 +46,18 @@
     white-space: nowrap; /* Prevent the text from wrapping */
     font-size: 1.5em;
     font-weight: bold;
+  }
+  .save-success-message {
+    color: green;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .checkmark {
+    font-size: 24px; /* Adjust size as needed */
+    margin-right: 5px;
   }
   
   .interest-item:hover {

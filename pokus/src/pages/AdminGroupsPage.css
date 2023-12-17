@@ -14,7 +14,7 @@
     list-style: none; /* Remove default list styling */
     padding: 0;
     margin: 0;
-    max-width: 600px; /* Set a max-width for the list */
+    max-width: 800px; /* Set a max-width for the list */
     margin: auto; /* Center the list */
   }
   
@@ -29,6 +29,9 @@
     align-items: center; /* Align items vertically */
   }
   
+  .group-interest {
+    color: black;
+  }
   .admin-group-item:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow on hover for interactivity */
   }

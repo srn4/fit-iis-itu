@@ -24,6 +24,8 @@ type MemberGroup = {
   }>;
 };
 
+
+
 const GroupsPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ const GroupsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const [groups, setGroups] = useState<Group[]>([]); // Now groups is typed correctly
+  const [groups, setGroups] = useState<Group[]>([]); 
   const [groupData, setGroupData] = useState({
     name: "",
     description: "",
@@ -47,7 +49,7 @@ const GroupsPage = () => {
     const fetchGroups = async () => {
       try {
         const response = await axios.get(`${apiUrl}/api/groups`);
-        setGroups(response.data); // Ensure this matches the structure of your response
+        setGroups(response.data); 
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
@@ -152,7 +154,6 @@ const GroupsPage = () => {
   return (
     <div className="groups-page-container">
       <div className="top-bar">
-        <input type="text" className="search-bar" placeholder="Hledat..." />
         {user && <ProfileDisplay user={user} />}
       </div>
       <div className="content-container">
