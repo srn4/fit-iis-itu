@@ -18,4 +18,9 @@ class UserInterest extends Model
     protected $fillable = [
         'user_id', 'interest_id',
     ];
+
+    public function interest()
+    {
+        return $this->belongsTo(Interest::class, 'interest_id');
+    }
 }

@@ -112,7 +112,8 @@ Route::delete('/interests/{id}', [InterestController::class, 'delete']);
 }
  */
 Route::post('/add-interest', [UserInterestController::class, 'addInterest']);
-
+//get user interests, user id passed in request
+Route::get('/user-interests', [UserInterestController::class, 'getUserInterests']);
 
 
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
