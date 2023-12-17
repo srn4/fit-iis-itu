@@ -6,7 +6,6 @@ import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrePage";
 import GroupsPage from "./pages/GroupsPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import CreateGroupsPage from "./pages/CreateGroupsPage";
 import UserDetailPage from "./pages/UserDetailPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import AdminGroupsPage from "./pages/AdminGroupsPage";
@@ -35,14 +34,6 @@ function App() {
             element={
               <ProtectedRoute>
                 <UserDetailPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="create-group"
-            element={
-              <ProtectedRoute>
-                <CreateGroupsPage />
               </ProtectedRoute>
             }
           />

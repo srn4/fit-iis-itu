@@ -24,7 +24,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ user }) => {
   return (
     <div className="user-profile">
       <div className="user-name">
-        <strong>Přihlášen jako:</strong> {user.login}{" "}
+        {user.login}{" "}
         {fullName && <span>{fullName}</span>}
       </div>
       <button
@@ -32,7 +32,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ user }) => {
         onClick={handleUserSettings}
         aria-label="Open user settings"
       >
-        User Setup
+        Nastavení
       </button>
     </div>
   );

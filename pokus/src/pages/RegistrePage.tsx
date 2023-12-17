@@ -1,11 +1,26 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Registration from '../components/Registre'; // Import your Registration component
 import './Login.css';
 
 function RegistrationPage() {
+    const navigate = useNavigate();
+
+    const handleLoginRedirect = () => {
+        navigate('/login'); // Redirects to the login page
+    };
+
     return (
         <div className="login-page-container">
-            <div>
+            <div className="login-header">
+                <button 
+                    onClick={handleLoginRedirect} 
+                    className="login-redirect-button"
+                >
+                    Přihlásit se
+                </button>
+            </div>
+            <div className="registration-wrapper">
                 <h2 className="login-page-title">Registrace</h2>
                 <Registration />
             </div>
@@ -14,3 +29,5 @@ function RegistrationPage() {
 }
 
 export default RegistrationPage;
+
+

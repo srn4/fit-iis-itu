@@ -46,3 +46,25 @@
 .login-button:hover {
     background-color: #0277bd;
 }
+
+/* Style for success message */
+.login-success {
+    color: #28a745; /* Green color for success */
+    background-color: #e6f9f0; /* Light green background */
+    border: 1px solid #28a745;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.1em;
+  }
+  
+  /* Style for error message */
+  .login-error {
+    color: #dc3545; /* Red color for error */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #dc3545;
+    padding: 10px;
+    margin-top: 10px;
+  }
+

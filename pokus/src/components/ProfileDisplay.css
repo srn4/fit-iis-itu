@@ -2,7 +2,7 @@
 .user-profile {
   flex-shrink: 0; /* Prevent the user profile from shrinking */
   margin-left: 20px; /* Space between search bar and profile display */
-  background: #fff; /* Light background for the user profile */
+  background: #d1d0d0; /* Light background for the user profile */
   padding: 10px 10px; /* Padding inside user profile */
   border-radius: 5px; /* Rounded corners for user profile */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for depth */
@@ -27,6 +27,6 @@
   }
   
   .user-settings-button:hover {
-    background-color: #0277bd; /* Darker shade for hover state */
+    background-color: #025d92; /* Darker shade for hover state */
   }
   
