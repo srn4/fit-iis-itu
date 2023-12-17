@@ -80,50 +80,100 @@ class PostController extends Controller
 
     public function reactToPost(Request $request, $postId)
     {
-        $userId = $request->header('user_id'); // Or use auth()->id() if you're using Laravel's authentication
+        $userId = $request->header('user_id');
 
         // Validate the reaction input
         $validatedData = $request->validate([
             'reaction' => 'nullable|in:like,dislike'
         ]);
 
-        $reaction = $validatedData['reaction'];
+        $newReaction = $validatedData['reaction'];
 
         // Check if the user already reacted to the post
         $existingReaction = PostLike::where('post_id', $postId)
-                                ->where('user_id', $userId)
-                                ->first();
+            ->where('user_id', $userId)
+            ->first();
 
         if ($existingReaction) {
-            if ($existingReaction->reaction === $reaction || $reaction === null) {
-                // Remove the reaction if it's the same or if new reaction is null
-                $existingReaction->delete();
+            if ($existingReaction->reaction === $newReaction || $newReaction === null) {
+                // Update the existing reaction if it's different or if the new reaction is null
+                $existingReaction->reaction = $newReaction;
+                $existingReaction->save();
             } else {
-                // Update the reaction if different
-                $existingReaction->update(['reaction' => $reaction]);
+                // Remove the existing reaction if the new reaction is different
+                $primaryKeyValues = $existingReaction->getAttributes(); // Get primary key values as an array
+                \Log::info("Existing reaction found. Primary Key Values: " . json_encode($primaryKeyValues));
+
+                // Adjust the line below to use the composite primary key values
+                PostLike::where($primaryKeyValues)->delete();
+
+                PostLike::create([
+                    'user_id' => $userId,
+                    'post_id' => $postId,
+                    'reaction' => $newReaction
+                ]);
+
             }
         } else {
-            if ($reaction !== null) {
+            if ($newReaction !== null) {
                 // Create a new reaction record
                 PostLike::create([
                     'user_id' => $userId,
                     'post_id' => $postId,
-                    'reaction' => $reaction
+                    'reaction' => $newReaction
                 ]);
             }
         }
 
-        // Fetch updated counts
-        $post = Post::with('user')->findOrFail($postId);
-        $likes_count = $post->likes()->where('reaction', 'like')->count();
-        $dislikes_count = $post->likes()->where('reaction', 'dislike')->count();
+        return response()->json(['message' => 'Reaction processed successfully']);
+    }
 
-        return response()->json([
-            'message' => 'Reaction updated successfully.',
-            'likes_count' => $likes_count,
-            'dislikes_count' => $dislikes_count,
-            'user_reaction' => $reaction
+
+    public function unreactPost(Request $request, $postId)
+    {
+        // Validate the request
+        $request->validate([
+            'reaction' => 'required|string|in:like,dislike', // Adjust the valid reaction types as needed
         ]);
+
+        // Get the user ID from the request header
+        $userId = $request->header('user_id');
+
+        // Log information for debugging
+        \Log::info("Request received for unreactPost. User ID: $userId, Post ID: $postId, Reaction: {$request->input('reaction')}");
+
+        // Check if a reaction exists before attempting to delete
+        try {
+            $existingReaction = PostLike::where([
+                ['post_id', '=', $postId],
+                ['user_id', '=', $userId],
+                ['reaction', '=', $request->input('reaction')],
+            ])->first();
+
+            // Log information for debugging
+            if ($existingReaction) {
+                $primaryKeyValues = $existingReaction->getAttributes(); // Get primary key values as an array
+                \Log::info("Existing reaction found. Primary Key Values: " . json_encode($primaryKeyValues));
+
+                // Adjust the line below to use the composite primary key values
+                PostLike::where($primaryKeyValues)->delete();
+
+                \Log::info("Reaction deleted successfully.");
+                return response()->json(['message' => 'Reaction deleted successfully']);
+            } else {
+                \Log::info("No existing reaction found, doing nothing.");
+                return response()->json(['message' => 'No existing reaction found']);
+            }
+
+            // Rest of the controller code...
+
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error("Exception caught: {$e->getMessage()}");
+
+            // Return a generic error response
+            return response()->json(['error' => 'An error occurred while processing the request.'], 500);
+        }
     }
 
 
