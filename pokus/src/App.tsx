@@ -12,6 +12,7 @@ import AdminGroupsPage from "./pages/AdminGroupsPage";
 import MembershipRequestsPage from "./pages/MembershipRequestsPage";
 import MemberGroupsPage from "./pages/MemberGroupsPage";
 import GroupPostsPage from "./pages/GroupPostsPage";
+import InterestsPage from "./pages/InterestsPage";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <UserDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/interests"
+            element={
+              <ProtectedRoute>
+                <InterestsPage />
               </ProtectedRoute>
             }
           />

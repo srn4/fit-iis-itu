@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./UserDetailForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -27,30 +27,47 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
   const [surname, setSurname] = useState(user.surname);
   const [login, setLogin] = useState(user.login);
   const [updateSuccess, setUpdateSuccess] = useState("");
+  const [newInterest, setNewInterest] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const triggerSuccessMessage = (message: string) => {
+    setUpdateSuccess(message);
+    setShowSuccess(true);
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 2000);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const response = await axios.put(
-        `${apiUrl}/api/users/${user.id}`,
-        {
-          name: name,
-          surname: surname,
-          login: login,
-        }
-      );
+      const response = await axios.put(`${apiUrl}/api/users/${user.id}`, {
+        name: name,
+        surname: surname,
+        login: login,
+      });
 
       // Call onUpdate to update the parent state
       onUpdate(response.data.user);
 
-      
-      setUpdateSuccess("Změna provedena!");
+      triggerSuccessMessage("Změna provedena!");
     } catch (error) {
       // Handle the error, maybe set an error state and show it in the UI
       console.error("There was an error updating the user:", error);
     }
   };
+
+  useEffect(() => {
+    if (updateSuccess) {
+      const timer = setTimeout(() => {
+        setUpdateSuccess(""); // Clear the success message
+      }, 2000);
+
+      // Clean up the timer when the component unmounts or if the message changes
+      return () => clearTimeout(timer);
+    }
+  }, [updateSuccess]);
 
   const handleLogout = () => {
     onLogout();
@@ -63,9 +80,7 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
       )
     ) {
       try {
-        const response = await axios.delete(
-          `${apiUrl}/api/users/${user.id}`
-        );
+        const response = await axios.delete(`${apiUrl}/api/users/${user.id}`);
         alert("User deleted successfully!");
         onLogout(); // Log out the user after account deletion
       } catch (error) {
@@ -79,9 +94,25 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
     navigate("/admin/users"); // Path to the page showing all users
   };
 
+  const handleCreateInterest = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault(); // This should prevent the page from reloading
+
+    try {
+      await axios.post(`${apiUrl}/api/interests`, { name: newInterest });
+      alert("Interest created successfully!");
+      setNewInterest(""); // Reset the form field
+    } catch (error) {
+      console.error("Error creating interest:", error);
+      alert("There was a problem creating the interest.");
+    }
+  };
+
   return (
     <>
       <form className="user-detail-form" onSubmit={handleSubmit}>
+        <div className="form-inputs-container">
         <div className="form-row">
           <label htmlFor="name">Jméno</label>
           <input
@@ -111,10 +142,22 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
             onChange={(e) => setLogin(e.target.value)}
           />
         </div>
-
-        <div className="button-container">
-          <button type="submit" className="save-button">
+        <button type="submit" className="save-button">
             Uložit údaje
+          </button>
+          <div className={`user-update-success ${showSuccess ? 'user-update-success-visible' : ''}`}>
+          {updateSuccess}
+        </div>
+          
+        </div>
+        
+        <div className="button-container">
+        <button
+            type="button"
+            onClick={() => navigate("/interests")}
+            className="interests-redirect-button"
+          >
+            Vybrat zájmy
           </button>
           <button
             type="button"
@@ -139,9 +182,27 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
               View All Users
             </button>
           )}
+          
+          
         </div>
-        {updateSuccess && <div className="login-success">{updateSuccess}</div>}
+        
       </form>
+      {user.role === "admin" && (
+            <form className="new-interest-form" onSubmit={handleCreateInterest}>
+              <div className="form-row">
+                <label htmlFor="newInterest">Nový zájem</label>
+                <input
+                  id="newInterest"
+                  type="text"
+                  value={newInterest}
+                  onChange={(e) => setNewInterest(e.target.value)}
+                />
+              </div>
+              <button type="submit" className="create-interest-button">
+                Přidat zájem
+              </button>
+            </form>
+          )}
 
       <div className="user-role-display">
         <label className="user-role-label">Role:</label>

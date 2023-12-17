@@ -1,15 +1,21 @@
 /* UserDetailForm.css */
 .user-detail-form {
-    display: flex;
-    flex-direction: column;
-    min-width: 900px; /* Adjust the max width as needed */
-    margin: 50px right; /* Center form on the page */
+  display: flex;
+  justify-content: space-between; /* Add space between the inputs and buttons */
+  min-width: 900px; /* Adjust the max width as needed */
+  margin-top: 50px;
 }
 
 .form-row {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    max-width: 400px;
+    border-radius: 5px;
+}
+.form-inputs-container {
+  flex-grow: 1; /* Allow input fields to take up remaining space */
+  margin-top: 20px;
 }
 
 .form-row label {
@@ -17,15 +23,23 @@
     margin-right: 10px; /* Consistent margin */
 }
 
-.button-container {
-    display: flex;
-    justify-content: space-between; /* Adjust as needed */
-    margin-top: 20px;
-  }
+.save-button{
+  margin-left: 100px;
+}
 
-  .button-container button {
-    margin: 0 10px;
-  }
+.button-container {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: flex-start; /* Align buttons to the start (left) */
+}
+
+/* Remove specific margins from buttons if they were set */
+.logout-button,
+.user-detail-form-delete-button,
+.admin-redirect-button,
+.interests-redirect-button {
+  margin: 0;
+}
 
 .form-row input[type="text"],
 .form-row input[type="checkbox"] {
@@ -34,6 +48,29 @@
     padding: 10px;
     border: 1px solid #ccc;
     width: calc(100% - 10px); /* Full width minus margin */
+    border-radius: 10px;
+}
+
+.user-update-success {
+  display: inline-block; /* Display as inline-block to fit content */
+  background-color: #4caf50; /* Success color */
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px; /* Space above the message */
+  margin-left: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: add a slight shadow */
+  transition: opacity 0.5s, visibility 0.5s;
+  visibility: hidden; /* Make it visible */
+  opacity: 0; /* Make it opaque */
+  max-width: 100%; /* Ensure it doesn't exceed the parent's width */
+}
+
+/* When message is present, make it visible and opaque */
+.user-update-success-visible {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Adjust the margin for specific input fields if needed */
@@ -58,7 +95,7 @@
   }
 
   .logout-button {
-    background-color: #0288d1;
+    background-color: #d12424;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -69,11 +106,11 @@
   }
 
   .logout-button:hover{
-    background-color: #0277bd;
+    background-color: #b11c1c;
   }
   
   .user-detail-form-delete-button {
-    background-color: #d32f2f; /* Red color for delete button */
+    background-color: #8d0202; /* Red color for delete button */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -81,11 +118,10 @@
     cursor: pointer;
     font-size: 2em; /* Adjust as needed */
     margin-top: 20px;
-    /* ... other styles similar to your save-button but with a red color ... */
   }
   
   .user-detail-form-delete-button:hover {
-    background-color: #c62828; /* Darker red for hover state */
+    background-color: #610303; /* Darker red for hover state */
   }
 
   .user-role-display {
@@ -111,6 +147,23 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 2em; /* Adjust as needed */
+    font-size: 1em; /* Adjust as needed */
     margin-top: 20px;
+  }
+
+  .interests-redirect-button {
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    font-size: 2em; /* Adjust font size as needed */
+  }
+  
+  .interests-redirect-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
   }
