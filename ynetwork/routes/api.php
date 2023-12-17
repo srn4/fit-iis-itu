@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\InterestController;
 use App\Http\Controllers\GroupMemberController;
+use App\Http\Controllers\UserInterestController;
 
 
 /*
@@ -102,6 +103,15 @@ Route::post('/interests', [InterestController::class, 'create']);
 Route::get('/interests/{id}', [InterestController::class, 'read']);
 Route::put('/interests/{id}', [InterestController::class, 'update']);
 Route::delete('/interests/{id}', [InterestController::class, 'delete']);
+
+//user interest controllers
+/* arguments passed in a request body like this:
+{
+  "user_id": 1,
+  "interest_id": 1
+}
+ */
+Route::post('/add-interest', [UserInterestController::class, 'addInterest']);
 
 
 
