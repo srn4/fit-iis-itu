@@ -164,14 +164,14 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
             onClick={handleLogout}
             className="logout-button"
           >
-            Odhlásit
+            Odhlásit se
           </button>
           <button
             type="button"
             onClick={handleDeleteUser}
             className="user-detail-form-delete-button"
           >
-            Smazat
+            Smazat účet
           </button>
           {user.role === "admin" && (
             <button
@@ -179,7 +179,7 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
               onClick={handleAdminRedirect}
               className="admin-redirect-button"
             >
-              View All Users
+              Zobrazit všechny uživatele
             </button>
           )}
           

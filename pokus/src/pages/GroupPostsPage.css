@@ -30,6 +30,7 @@
     text-align: center;
     color: #ccc9c9; /* Changed for better visibility on dark background */
     margin-bottom: 20px;
+    padding-top: 50px;
   }
   
   .post-list {
@@ -63,7 +64,7 @@
   
   .post-form {
     padding: 20px;
-    background-color: #fff;
+    background: linear-gradient(180deg, #3a3939 0%, #a8a8a8 100%);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-left: 20px; /* Spacing between the list and the form */
@@ -72,30 +73,51 @@
   }
   
   .form-input, .form-textarea {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
     border: 1px solid #ddd;
+    background-color: #a8a8a8;
+    font-size: 1.5em;
   }
 
   .form-textarea {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #969494;
     height: 150px; /* Increased height for the textarea */
   }
   
   .form-submit {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  .submit-success-icon {
+    color: green;
+    margin-left: 10px;
+    animation: fadeInOut 3s;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+  .form-submit:hover {
+    background-color: #025ab8;
   }
   
   .reaction-buttons {
@@ -113,20 +135,42 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 2em;
-
   }
   
   .reaction-buttons button:disabled {
     cursor: default;
     opacity: 0.7;
   }
+  .reaction-buttons button.remove-reaction {
+    background-color: #f44336; /* Red color */
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+    margin-left: 350px;
+  }
+  
+  .reaction-buttons  button.remove-reaction:hover {
+    background-color: #881d1d; /* Darker shade for hover effect */
+  }
   
   .reaction-buttons button.like-button {
     background-color: #4caf50; /* Green background for like button */
   }
+
+  .reaction-buttons button.like-button:hover {
+    background-color: #347e37; /* Green background for like button */
+  }
   
   .reaction-buttons button.dislike-button {
     background-color: #f44336; /* Red background for dislike button */
+  }
+
+  .reaction-buttons button.dislike-button:hover {
+    background-color: #922720; /* Red background for dislike button */
   }
   
   .reaction-buttons button.like-button:disabled {

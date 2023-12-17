@@ -4,6 +4,7 @@ import axios from "axios";
 import { apiUrl } from "../constants";
 import "./GroupPostsPage.css";
 import { AuthContext } from "../contexts/Authorization";
+const MAX_CONTENT_LENGTH = 255;
 
 // Define the expected properties of the group object
 interface Group {
@@ -34,11 +35,13 @@ interface Post {
 
 const GroupPostsPage = () => {
   const { groupId } = useParams<{ groupId: string }>();
-  const { user } = useContext(AuthContext); // Accessing user from AuthContext
+  const { user } = useContext(AuthContext);
   const [group, setGroup] = useState<Group | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -53,15 +56,7 @@ const GroupPostsPage = () => {
         const postsResponse = await axios.get(
           `${apiUrl}/api/posts-in-group/${groupId}`
         );
-        console.log(postsResponse.data.posts);
-        setPosts(
-          postsResponse.data.posts.map((post: Post) => ({
-            ...post,
-            likes_count: post.likes_count || 0,
-            dislikes_count: post.dislikes_count || 0,
-            user_reaction: post.user_reaction || null,
-          }))
-        );
+        setPosts(postsResponse.data.posts); // Assuming the posts include user_reaction
       } catch (error) {
         console.error("Error fetching group details:", error);
       }
@@ -74,6 +69,16 @@ const GroupPostsPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (content.length > MAX_CONTENT_LENGTH) {
+      setErrorMessage(
+        `Content exceeds the maximum length of ${MAX_CONTENT_LENGTH} characters.`
+      );
+      return;
+    }
+
+    setErrorMessage(""); // Clear error message on successful validation
+
     try {
       const response = await axios.post(`${apiUrl}/api/posts`, {
         user_id: user.id,
@@ -81,9 +86,19 @@ const GroupPostsPage = () => {
         subject,
         content,
       });
-      setPosts([...posts, { ...response.data.post, user }]); // Update the posts list
-      setSubject(""); // Reset the subject input
-      setContent(""); // Reset the content input
+      // Initialize likes and dislikes count for the new post
+      const newPost = {
+        ...response.data.post,
+        user,
+        likes_count: 0,
+        dislikes_count: 0,
+        user_reaction: null,
+      };
+      setPosts([...posts, newPost]);
+      setSubject("");
+      setContent("");
+      setSubmissionSuccess(true);
+      setTimeout(() => setSubmissionSuccess(false), 3000); // Reset after 3 seconds
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -92,67 +107,85 @@ const GroupPostsPage = () => {
   const handleReaction = async (postId: number, reaction: string) => {
     try {
       const currentPost = posts.find((post) => post.id === postId);
-      if (!currentPost) {
-        console.error("Post not found");
+      if (!currentPost || currentPost.user_reaction === reaction) {
+        // If the user has already reacted with this reaction, do nothing
         return;
       }
-
-      // Determine if the user is toggling the reaction
-      const isTogglingReaction = currentPost.user_reaction === reaction;
-      const newReaction = isTogglingReaction ? null : reaction;
 
       // Send the reaction to the server
       await axios.post(
         `${apiUrl}/api/post/${postId}/react`,
-        {
-          reaction: newReaction,
-        },
-        {
-          headers: { user_id: user.id.toString() },
-        }
+        { reaction },
+        { headers: { user_id: user.id.toString() } }
       );
 
-      // Update the post's reaction counts
+      // Update the local state
       setPosts(
         posts.map((post) => {
           if (post.id === postId) {
             let likesCount = post.likes_count;
             let dislikesCount = post.dislikes_count;
 
-            if (newReaction === "like") {
+            if (reaction === "like") {
               likesCount++;
               if (currentPost.user_reaction === "dislike") {
                 dislikesCount--;
               }
-            } else if (newReaction === "dislike") {
+            } else if (reaction === "dislike") {
               dislikesCount++;
               if (currentPost.user_reaction === "like") {
                 likesCount--;
               }
-            } else {
-              if (isTogglingReaction) {
-                if (currentPost.user_reaction === "like") {
-                  likesCount--;
-                } else {
-                  dislikesCount--;
-                }
-              }
-            }
+            } 
 
             return {
               ...post,
               likes_count: likesCount,
               dislikes_count: dislikesCount,
-              user_reaction: newReaction,
+              user_reaction: reaction,
             };
           }
           return post;
         })
       );
     } catch (error) {
-      console.error("Error submitting reaction:", error);
+      console.error("Error handling reaction:", error);
     }
-  };
+};
+
+
+const removeReaction = async (postId: number) => {
+  try {
+    const currentPost = posts.find((post) => post.id === postId);
+    if (!currentPost || !currentPost.user_reaction) {
+      // If the user has not reacted, do nothing
+      return;
+    }
+
+    // Send a request to remove the reaction, including the reaction type
+    await axios.delete(`${apiUrl}/api/unreact-post/${postId}?reaction=${currentPost.user_reaction}`, {
+      headers: { user_id: user.id.toString() }
+    });
+
+    // Update local state
+    setPosts(
+      posts.map((post) => {
+        if (post.id === postId) {
+          return {
+            ...post,
+            likes_count: post.user_reaction === "like" ? post.likes_count - 1 : post.likes_count,
+            dislikes_count: post.user_reaction === "dislike" ? post.dislikes_count - 1 : post.dislikes_count,
+            user_reaction: null
+          };
+        }
+        return post;
+      })
+    );
+  } catch (error) {
+    console.error("Error removing reaction:", error);
+  }
+};
+
 
   if (!group) {
     return <div>Loading group details...</div>;
@@ -169,28 +202,18 @@ const GroupPostsPage = () => {
                 <p className="post-content">{post.content}</p>
                 <p className="post-user">Přidal: {post.user.login}</p>
                 <div className="reaction-buttons">
-                  <button
-                    className="like-button"
-                    onClick={() => handleReaction(post.id, "like")}
-                    disabled={post.user_reaction === "like"}
-                  >
+                  <button onClick={() => handleReaction(post.id, "like")} className="like-button">
                     Like
                   </button>
                   <span>{post.likes_count}</span>
-
-                  <button
-                    className="dislike-button"
-                    onClick={() => handleReaction(post.id, "dislike")}
-                    disabled={post.user_reaction === "dislike"}
-                  >
+                  <button onClick={() => handleReaction(post.id, "dislike")} className="dislike-button">
                     Dislike
                   </button>
                   <span>{post.dislikes_count}</span>
-                </div>
-                <div>
-                  Likes: {post.likes_count}, Dislikes: {post.dislikes_count}
                   {post.user_reaction && (
-                    <p>You have reacted with: {post.user_reaction}</p>
+                    <button onClick={() => removeReaction(post.id)} className="remove-reaction">
+                      odstranit reakci
+                    </button>
                   )}
                 </div>
               </li>
@@ -202,18 +225,20 @@ const GroupPostsPage = () => {
             type="text"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            placeholder="Subject"
+            placeholder="Téma"
             className="form-input"
           />
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Content"
+            placeholder="Obsah příspěvku"
             className="form-textarea"
           />
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <button type="submit" className="form-submit">
             Zveřejnit
           </button>
+          {submissionSuccess && <span className="submit-success-icon">✔️</span>}
         </form>
       </div>
     </div>
