@@ -25,12 +25,9 @@ const MemberGroupsPage = () => {
   useEffect(() => {
     const fetchMemberGroups = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/api/user-groups`,
-          {
-            headers: { user_id: user.id },
-          }
-        );
+        const response = await axios.get(`${apiUrl}/api/user-groups`, {
+          headers: { user_id: user.id },
+        });
         // Make sure the response matches the Group interface
         setMemberGroups(response.data.member_groups);
       } catch (error) {
@@ -54,7 +51,11 @@ const MemberGroupsPage = () => {
       <h1>Členské skupiny</h1>
       <ul className="member-groups-list">
         {memberGroups.map((groupContainer) => (
-          <li key={groupContainer.group.id} className="member-group-item" onClick={() => handleGroupClick(groupContainer.group.id)}>
+          <li
+            key={groupContainer.group.id}
+            className="member-group-item"
+            onClick={() => handleGroupClick(groupContainer.group.id)}
+          >
             <span className="group-name">{groupContainer.group.name}</span>
             <span className="group-description">
               {groupContainer.group.description}

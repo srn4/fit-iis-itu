@@ -136,7 +136,7 @@ const GroupPostsPage = () => {
               if (currentPost.user_reaction === "like") {
                 likesCount--;
               }
-            } 
+            }
 
             return {
               ...post,
@@ -151,41 +151,48 @@ const GroupPostsPage = () => {
     } catch (error) {
       console.error("Error handling reaction:", error);
     }
-};
+  };
 
+  const removeReaction = async (postId: number) => {
+    try {
+      const currentPost = posts.find((post) => post.id === postId);
+      if (!currentPost || !currentPost.user_reaction) {
+        // If the user has not reacted, do nothing
+        return;
+      }
 
-const removeReaction = async (postId: number) => {
-  try {
-    const currentPost = posts.find((post) => post.id === postId);
-    if (!currentPost || !currentPost.user_reaction) {
-      // If the user has not reacted, do nothing
-      return;
-    }
-
-    // Send a request to remove the reaction, including the reaction type
-    await axios.delete(`${apiUrl}/api/unreact-post/${postId}?reaction=${currentPost.user_reaction}`, {
-      headers: { user_id: user.id.toString() }
-    });
-
-    // Update local state
-    setPosts(
-      posts.map((post) => {
-        if (post.id === postId) {
-          return {
-            ...post,
-            likes_count: post.user_reaction === "like" ? post.likes_count - 1 : post.likes_count,
-            dislikes_count: post.user_reaction === "dislike" ? post.dislikes_count - 1 : post.dislikes_count,
-            user_reaction: null
-          };
+      // Send a request to remove the reaction, including the reaction type
+      await axios.delete(
+        `${apiUrl}/api/unreact-post/${postId}?reaction=${currentPost.user_reaction}`,
+        {
+          headers: { user_id: user.id.toString() },
         }
-        return post;
-      })
-    );
-  } catch (error) {
-    console.error("Error removing reaction:", error);
-  }
-};
+      );
 
+      // Update local state
+      setPosts(
+        posts.map((post) => {
+          if (post.id === postId) {
+            return {
+              ...post,
+              likes_count:
+                post.user_reaction === "like"
+                  ? post.likes_count - 1
+                  : post.likes_count,
+              dislikes_count:
+                post.user_reaction === "dislike"
+                  ? post.dislikes_count - 1
+                  : post.dislikes_count,
+              user_reaction: null,
+            };
+          }
+          return post;
+        })
+      );
+    } catch (error) {
+      console.error("Error removing reaction:", error);
+    }
+  };
 
   if (!group) {
     return <div>Loading group details...</div>;
@@ -202,16 +209,25 @@ const removeReaction = async (postId: number) => {
                 <p className="post-content">{post.content}</p>
                 <p className="post-user">Přidal: {post.user.login}</p>
                 <div className="reaction-buttons">
-                  <button onClick={() => handleReaction(post.id, "like")} className="like-button">
+                  <button
+                    onClick={() => handleReaction(post.id, "like")}
+                    className="like-button"
+                  >
                     Like
                   </button>
                   <span>{post.likes_count}</span>
-                  <button onClick={() => handleReaction(post.id, "dislike")} className="dislike-button">
+                  <button
+                    onClick={() => handleReaction(post.id, "dislike")}
+                    className="dislike-button"
+                  >
                     Dislike
                   </button>
                   <span>{post.dislikes_count}</span>
                   {post.user_reaction && (
-                    <button onClick={() => removeReaction(post.id)} className="remove-reaction">
+                    <button
+                      onClick={() => removeReaction(post.id)}
+                      className="remove-reaction"
+                    >
                       odstranit reakci
                     </button>
                   )}

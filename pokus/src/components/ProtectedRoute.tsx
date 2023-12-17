@@ -1,12 +1,14 @@
-import React, { ReactNode, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/Authorization';
+import React, { ReactNode, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../contexts/Authorization";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps): JSX.Element | null => {
+const ProtectedRoute = ({
+  children,
+}: ProtectedRouteProps): JSX.Element | null => {
   const { isAuthenticated, loading } = useContext(AuthContext);
 
   if (loading) {
@@ -20,7 +22,4 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps): JSX.Element | null =
   return <>{children}</>;
 };
 
-
 export default ProtectedRoute;
-
-

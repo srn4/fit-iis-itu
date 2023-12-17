@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProfileDisplay.css";
 
-
 interface ProfileDisplayProps {
   user: {
     login: string;
@@ -24,8 +23,7 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ user }) => {
   return (
     <div className="user-profile">
       <div className="user-name">
-        {user.login}{" "}
-        {fullName && <span>{fullName}</span>}
+        {user.login} {fullName && <span>{fullName}</span>}
       </div>
       <button
         className="user-settings-button"

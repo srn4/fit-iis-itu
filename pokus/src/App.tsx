@@ -14,6 +14,16 @@ import MemberGroupsPage from "./pages/MemberGroupsPage";
 import GroupPostsPage from "./pages/GroupPostsPage";
 import InterestsPage from "./pages/InterestsPage";
 
+/*
+  Autoři": Tomáš Najman-xnajma03, Karel Srna-xsrnak00
+  Projekt do předmětu ITU 2023
+  
+  Tomáš Najman: Startpage, RegistrePage, LoginPage, UserDetailPage, InterestsPage, AdminUsersPage, Authorization, App.tsx, ProtectedRoute
+  Karel Srna: AdminGroupsPage, GroupPostsPage, GroupsPage, MemberGroupsPage, MembershipRequestsPage
+
+  Ke všem souborům složící jako stránky patří i stylování a obsažené komponenty v nich
+*/
+
 function App() {
   return (
     <AuthProvider>

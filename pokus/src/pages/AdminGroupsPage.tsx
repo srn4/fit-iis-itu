@@ -33,7 +33,9 @@ const AdminGroupsPage = () => {
       try {
         const [interestsResponse, adminGroupsResponse] = await Promise.all([
           axios.get(`${apiUrl}/api/interests`),
-          axios.get(`${apiUrl}/api/admin-groups`, { headers: { user_id: user.id } })
+          axios.get(`${apiUrl}/api/admin-groups`, {
+            headers: { user_id: user.id },
+          }),
         ]);
         setInterests(interestsResponse.data);
         setAdminGroups(adminGroupsResponse.data.admin_groups);
@@ -50,7 +52,7 @@ const AdminGroupsPage = () => {
   const updateGroupInterest = async (groupId: number, interestId: number) => {
     try {
       await axios.put(`${apiUrl}/api/groups/${groupId}`, {
-        interest_id: interestId
+        interest_id: interestId,
       });
       alert("Group interest updated successfully.");
       // Optionally, refetch groups or update the state to reflect the change
@@ -89,8 +91,13 @@ const AdminGroupsPage = () => {
               {groupContainer.group.description}
             </span>
             <div className="group-actions">
-            <select
-                onChange={(e) => updateGroupInterest(groupContainer.group.id, Number(e.target.value))}
+              <select
+                onChange={(e) =>
+                  updateGroupInterest(
+                    groupContainer.group.id,
+                    Number(e.target.value)
+                  )
+                }
               >
                 <option value="">Select an interest</option>
                 {interests.map((interest) => (

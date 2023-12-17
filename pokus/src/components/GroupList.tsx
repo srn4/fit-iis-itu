@@ -14,7 +14,6 @@ type AdminGroup = {
 };
 
 type MemberGroup = {
-  // Assuming a similar structure for member groups
   member_groups: Array<{
     user_id: number;
     group_id: number;
@@ -24,8 +23,8 @@ type MemberGroup = {
 
 interface GroupListProps {
   groups: Group[];
-  adminGroups: AdminGroup; // Use the newly defined type
-  memberGroups: MemberGroup; // Use the newly defined type
+  adminGroups: AdminGroup;
+  memberGroups: MemberGroup;
 }
 type Group = {
   id: number;

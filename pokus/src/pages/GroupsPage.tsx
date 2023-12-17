@@ -24,8 +24,6 @@ type MemberGroup = {
   }>;
 };
 
-
-
 const GroupsPage = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -40,7 +38,7 @@ const GroupsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const [groups, setGroups] = useState<Group[]>([]); 
+  const [groups, setGroups] = useState<Group[]>([]);
   const [groupData, setGroupData] = useState({
     name: "",
     description: "",
@@ -49,7 +47,7 @@ const GroupsPage = () => {
     const fetchGroups = async () => {
       try {
         const response = await axios.get(`${apiUrl}/api/groups`);
-        setGroups(response.data); 
+        setGroups(response.data);
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
@@ -153,30 +151,28 @@ const GroupsPage = () => {
 
   return (
     <div className="groups-page-container">
-      <div className="top-bar">
-        {user && <ProfileDisplay user={user} />}
-      </div>
+      <div className="top-bar">{user && <ProfileDisplay user={user} />}</div>
       <div className="content-container">
         <div className="form-logo">
-        <form className="create-group-form" onSubmit={handleCreateNewGroup}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Jméno skupiny"
-            value={groupData.name}
-            onChange={handleChange}
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Popis skupiny"
-            value={groupData.description}
-            onChange={handleChange}
-            required
-          />
-          <button type="submit">Vytvořit skupinu</button>
-        </form>
-        <img src="/Y_logo.png" alt="Logo" className="group-page-logo" />
+          <form className="create-group-form" onSubmit={handleCreateNewGroup}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Jméno skupiny"
+              value={groupData.name}
+              onChange={handleChange}
+              required
+            />
+            <textarea
+              name="description"
+              placeholder="Popis skupiny"
+              value={groupData.description}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Vytvořit skupinu</button>
+          </form>
+          <img src="/Y_logo.png" alt="Logo" className="group-page-logo" />
         </div>
         <div className="main-content">
           <GroupList

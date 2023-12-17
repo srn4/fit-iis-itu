@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./UserDetailForm.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -113,46 +113,49 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
     <>
       <form className="user-detail-form" onSubmit={handleSubmit}>
         <div className="form-inputs-container">
-        <div className="form-row">
-          <label htmlFor="name">Jméno</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
+          <div className="form-row">
+            <label htmlFor="name">Jméno</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
 
-        <div className="form-row">
-          <label htmlFor="surname">Příjmení</label>
-          <input
-            id="surname"
-            type="text"
-            value={surname}
-            onChange={(e) => setSurname(e.target.value)}
-          />
-        </div>
+          <div className="form-row">
+            <label htmlFor="surname">Příjmení</label>
+            <input
+              id="surname"
+              type="text"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </div>
 
-        <div className="form-row">
-          <label htmlFor="login">Login </label>
-          <input
-            id="login"
-            type="text"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="save-button">
+          <div className="form-row">
+            <label htmlFor="login">Login </label>
+            <input
+              id="login"
+              type="text"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="save-button">
             Uložit údaje
           </button>
-          <div className={`user-update-success ${showSuccess ? 'user-update-success-visible' : ''}`}>
-          {updateSuccess}
+          <div
+            className={`user-update-success ${
+              showSuccess ? "user-update-success-visible" : ""
+            }`}
+          >
+            {updateSuccess}
+          </div>
         </div>
-          
-        </div>
-        
+
         <div className="button-container">
-        <button
+          <button
             type="button"
             onClick={() => navigate("/interests")}
             className="interests-redirect-button"
@@ -182,27 +185,24 @@ const UserDetailForm: React.FC<UserDetailFormProps> = ({
               Zobrazit všechny uživatele
             </button>
           )}
-          
-          
         </div>
-        
       </form>
       {user.role === "admin" && (
-            <form className="new-interest-form" onSubmit={handleCreateInterest}>
-              <div className="form-row">
-                <label htmlFor="newInterest">Nový zájem</label>
-                <input
-                  id="newInterest"
-                  type="text"
-                  value={newInterest}
-                  onChange={(e) => setNewInterest(e.target.value)}
-                />
-              </div>
-              <button type="submit" className="create-interest-button">
-                Přidat zájem
-              </button>
-            </form>
-          )}
+        <form className="new-interest-form" onSubmit={handleCreateInterest}>
+          <div className="form-row">
+            <label htmlFor="newInterest">Nový zájem</label>
+            <input
+              id="newInterest"
+              type="text"
+              value={newInterest}
+              onChange={(e) => setNewInterest(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="create-interest-button">
+            Přidat zájem
+          </button>
+        </form>
+      )}
 
       <div className="user-role-display">
         <label className="user-role-label">Role:</label>

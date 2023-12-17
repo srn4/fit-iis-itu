@@ -26,7 +26,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true); // Add a loading state
 
-  
   useEffect(() => {
     console.log("Checking for token...");
     const token = localStorage.getItem("auth_token");

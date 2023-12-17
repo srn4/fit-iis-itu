@@ -1,9 +1,8 @@
-// MembershipRequestsPage.jsx
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/Authorization";
-import "./MembershipRequestsPage.css"
+import "./MembershipRequestsPage.css";
 import { apiUrl } from "../constants";
 
 interface User {
@@ -95,7 +94,9 @@ const MembershipRequestsPage: React.FC = () => {
 
   return (
     <div className="membership-requests-page">
-      <h1 className="membership-requests-title">Potvrdit členství pro skupinu {groupId}</h1>
+      <h1 className="membership-requests-title">
+        Potvrdit členství pro skupinu {groupId}
+      </h1>
       <ul className="membership-requests-list">
         {requests.map((request) => (
           <li key={request.user.id} className="request-item">
@@ -103,10 +104,16 @@ const MembershipRequestsPage: React.FC = () => {
               {request.user.login} - {request.group.name}
             </span>
             <div className="request-action-buttons">
-              <button onClick={() => acceptRequest(request.user.id)} className="accept-button">
+              <button
+                onClick={() => acceptRequest(request.user.id)}
+                className="accept-button"
+              >
                 Potvrdit
               </button>
-              <button onClick={() => declineRequest(request.user.id)} className="decline-button">
+              <button
+                onClick={() => declineRequest(request.user.id)}
+                className="decline-button"
+              >
                 Zamítnout
               </button>
             </div>
