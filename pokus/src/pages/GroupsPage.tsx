@@ -80,7 +80,7 @@ const GroupsPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -156,6 +156,7 @@ const GroupsPage = () => {
         {user && <ProfileDisplay user={user} />}
       </div>
       <div className="content-container">
+        <div className="form-logo">
         <form className="create-group-form" onSubmit={handleCreateNewGroup}>
           <input
             type="text"
@@ -174,6 +175,8 @@ const GroupsPage = () => {
           />
           <button type="submit">Vytvořit skupinu</button>
         </form>
+        <img src="/Y_logo.png" alt="Logo" className="group-page-logo" />
+        </div>
         <div className="main-content">
           <GroupList
             groups={groups}

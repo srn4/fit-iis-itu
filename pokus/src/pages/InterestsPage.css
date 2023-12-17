@@ -1,0 +1,69 @@
+/* InterestsPage.css */
+
+.interests-page-container {
+    background: linear-gradient(180deg, #114305 0%, #004d40 100%);
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+  }
+  
+  .interests-title {
+    color: white;
+    margin-bottom: 20px;
+    margin-top: 200px;
+    font-size: 4em;
+  }
+  
+  .interests-list {
+    list-style: none;
+    padding: 10px;
+    margin: 0 auto; /* Center the list */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Align items vertically */
+    max-width: 300px;
+    max-height: 300px;
+    overflow-y: auto; /* Make it scrollable */
+    border: 1px solid #919191; /* Add a white border */
+    border-radius: 5px; /* Optional: round the corners */
+    gap: 10px; /* Add some space between the items */
+    background: linear-gradient(180deg, #3a3939 0%, #a8a8a8 100%);
+  }
+  
+  .interest-item {
+    background-color: #007bff; /* Blue background for buttons */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* Prevent the text from wrapping */
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .interest-item:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .save-interests-button {
+    background-color: #4caf50; /* Green background for the save button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    display: inline-block; /* To center the button */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .interest-item {
+      padding: 8px 12px; /* Smaller padding on smaller screens */
+    }
+  }
+  
