@@ -13,8 +13,17 @@
 Tomáš Najman-xnajma03, Karel Srna-xsrnak00
 Projekt do předmětu ITU 2023
 
-Tomáš Najman:
+Tomáš Najman: 
+AuthController.php
+UserController.php
+InterestController.php
+UserInterestController.php
+
 Karel Srna:
+GroupController.php
+GroupMemberController.php
+PostController.php
+
 
 ## About Laravel
 
